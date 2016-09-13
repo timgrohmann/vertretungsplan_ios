@@ -12,7 +12,6 @@
 		182446591D6090EA004D5207 /* TimeTableLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182446581D6090EA004D5207 /* TimeTableLayout.swift */; };
 		1824465B1D609D6F004D5207 /* header.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1824465A1D609D6F004D5207 /* header.xib */; };
 		1824465D1D60B35F004D5207 /* Timetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824465C1D60B35F004D5207 /* Timetable.swift */; };
-		182446611D60BE34004D5207 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824465F1D60BE34004D5207 /* Day.swift */; };
 		182446681D60CD96004D5207 /* editView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182446671D60CD96004D5207 /* editView.xib */; };
 		1824466A1D60D126004D5207 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182446691D60D126004D5207 /* EditView.swift */; };
 		18318D951D7C43AA00072640 /* XMLTimeTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18318D941D7C43AA00072640 /* XMLTimeTableData.swift */; };
@@ -23,6 +22,7 @@
 		18327D5E1D621797004823AE /* ChangedTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18327D5D1D621797004823AE /* ChangedTimetable.swift */; };
 		18327D601D62191B004823AE /* ChangedLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18327D5F1D62191B004823AE /* ChangedLesson.swift */; };
 		185A82B51D0C43BF00B24810 /* Klasse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185A82B41D0C43BF00B24810 /* Klasse.swift */; };
+		189471EF1D884C0D00BB16E1 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189471EE1D884C0D00BB16E1 /* Day.swift */; };
 		189AB6B81D0C1C0E002C3526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189AB6B71D0C1C0E002C3526 /* AppDelegate.swift */; };
 		189AB6BA1D0C1C0E002C3526 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189AB6B91D0C1C0E002C3526 /* ViewController.swift */; };
 		189AB6BD1D0C1C0E002C3526 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 189AB6BB1D0C1C0E002C3526 /* Main.storyboard */; };
@@ -56,7 +56,6 @@
 		182446581D6090EA004D5207 /* TimeTableLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableLayout.swift; sourceTree = "<group>"; };
 		1824465A1D609D6F004D5207 /* header.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = header.xib; sourceTree = "<group>"; };
 		1824465C1D60B35F004D5207 /* Timetable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timetable.swift; sourceTree = "<group>"; };
-		1824465F1D60BE34004D5207 /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Day.swift; path = ../Day.swift; sourceTree = "<group>"; };
 		182446671D60CD96004D5207 /* editView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = editView.xib; sourceTree = "<group>"; };
 		182446691D60D126004D5207 /* EditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		18318D941D7C43AA00072640 /* XMLTimeTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLTimeTableData.swift; sourceTree = "<group>"; };
@@ -68,6 +67,7 @@
 		18327D5D1D621797004823AE /* ChangedTimetable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangedTimetable.swift; sourceTree = "<group>"; };
 		18327D5F1D62191B004823AE /* ChangedLesson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangedLesson.swift; sourceTree = "<group>"; };
 		185A82B41D0C43BF00B24810 /* Klasse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Klasse.swift; sourceTree = "<group>"; };
+		189471EE1D884C0D00BB16E1 /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		189AB6B41D0C1C0E002C3526 /* Vertretungsplan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vertretungsplan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		189AB6B71D0C1C0E002C3526 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		189AB6B91D0C1C0E002C3526 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -162,7 +162,7 @@
 				189AB6C61D0C1C0E002C3526 /* Info.plist */,
 				189AB6CE1D0C2E9C002C3526 /* Lesson.swift */,
 				1824465C1D60B35F004D5207 /* Timetable.swift */,
-				1824465F1D60BE34004D5207 /* Day.swift */,
+				189471EE1D884C0D00BB16E1 /* Day.swift */,
 				18327D5B1D620E69004823AE /* Fadable.swift */,
 				189AB6CC1D0C1C65002C3526 /* XMLParser.swift */,
 				18327D5D1D621797004823AE /* ChangedTimetable.swift */,
@@ -279,6 +279,7 @@
 				18327D601D62191B004823AE /* ChangedLesson.swift in Sources */,
 				18318DA41D7C570A00072640 /* SchoolFetcher.swift in Sources */,
 				189AB6CD1D0C1C65002C3526 /* XMLParser.swift in Sources */,
+				189471EF1D884C0D00BB16E1 /* Day.swift in Sources */,
 				18318DA81D7C693D00072640 /* User.swift in Sources */,
 				18CDC6E51D6370C3001821D9 /* UIColor.swift in Sources */,
 				189AB6BA1D0C1C0E002C3526 /* ViewController.swift in Sources */,
@@ -287,7 +288,6 @@
 				185A82B51D0C43BF00B24810 /* Klasse.swift in Sources */,
 				1824466A1D60D126004D5207 /* EditView.swift in Sources */,
 				182446591D6090EA004D5207 /* TimeTableLayout.swift in Sources */,
-				182446611D60BE34004D5207 /* Day.swift in Sources */,
 				18327D5C1D620E69004823AE /* Fadable.swift in Sources */,
 				1814439A1D80478600991597 /* changedView.swift in Sources */,
 				18CDC6E21D636D49001821D9 /* School.swift in Sources */,
