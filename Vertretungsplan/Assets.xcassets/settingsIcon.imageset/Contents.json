@@ -5,11 +5,36 @@
       "scale" : "1x"
     },
     {
+      "resizing" : {
+        "mode" : "3-part-vertical",
+        "center" : {
+          "mode" : "tile",
+          "height" : 1
+        },
+        "cap-insets" : {
+          "top" : 21,
+          "bottom" : 21
+        }
+      },
       "idiom" : "universal",
       "filename" : "settingsIcon@2x.png",
       "scale" : "2x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 1,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 32,
+          "top" : 32,
+          "right" : 33,
+          "left" : 32
+        }
+      },
       "idiom" : "universal",
       "filename" : "settingsIcon@3x.png",
       "scale" : "3x"

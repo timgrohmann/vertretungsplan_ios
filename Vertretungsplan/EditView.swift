@@ -35,23 +35,23 @@ class EditView: UIView {
     
     var fadingView: UICollectionViewCell?
     
-    func sLesson(lesson: Lesson){
+    func sLesson(_ lesson: Lesson){
         self.lesson = lesson
-        actualSubject.text = lesson.subject ?? ""
-        actualTeacher.text = lesson.teacher ?? ""
-        actualRoom.text = lesson.room ?? ""
+        actualSubject.text = lesson.subject
+        actualTeacher.text = lesson.teacher
+        actualRoom.text = lesson.room
         
-        subjectTextField.text = lesson.subject ?? ""
-        teacherTextField.text = lesson.teacher ?? ""
-        roomTextField.text = lesson.room ?? ""
+        subjectTextField.text = lesson.subject
+        teacherTextField.text = lesson.teacher
+        roomTextField.text = lesson.room
         
         descriptionLabel.text = String(lesson.hour) + ". Stunde " + lesson.day.names[lesson.day.number]
         
         
         if let change = changedTimetable.getChange(lesson){
-            UIView.animateWithDuration(0.5){
+            UIView.animate(withDuration: 0.5, animations: {
                 self.backgroundColor = self.attentionColor
-            }
+            })
             infoTextLabel.text = change.info
             if(change.subject != lesson.subject){
                 actualSubject.text = change.subject
@@ -65,7 +65,7 @@ class EditView: UIView {
         }
     }
     
-    func fadeIn(start: UICollectionViewCell, size: CGSize){
+    func fadeIn(_ start: UICollectionViewCell, size: CGSize){
         
         self.fadingView = start
         
@@ -78,41 +78,41 @@ class EditView: UIView {
         self.alpha = 0
         self.layer.cornerRadius = 10
         
-        UIView.animateWithDuration(0.2){
+        UIView.animate(withDuration: 0.2, animations: {
             self.alpha = 1
             self.center = CGPoint(x: size.width*0.5, y: size.height*0.5)
-            self.bounds = CGRectMake(0,0, size.width - 40, size.height*0.4)
+            self.bounds = CGRect(x: 0,y: 0, width: size.width - 40, height: size.height*0.4)
             self.layoutIfNeeded()
-        }
+        })
     }
     
-    func fadeOut(completion: ()->()){
+    func fadeOut(_ completion: @escaping ()->()){
         
         guard let end = fadingView else {return}
         
-        UIView.animateWithDuration(0.2, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
             self.center = end.center
             self.center.x -= ((end.superview as? UIScrollView)?.contentOffset.x ?? 0)
             self.bounds = end.bounds
             self.alpha = 0.0
             self.layoutIfNeeded()
-        }){
+        }, completion: {
             finished in
             completion()
-        }
+        })
     }
     
-    @IBAction func subjectEdited(sender: UITextField) {
+    @IBAction func subjectEdited(_ sender: UITextField) {
         lesson?.subject = sender.text ?? ""
         save()
     }
     
-    @IBAction func teacherEdited(sender: UITextField) {
+    @IBAction func teacherEdited(_ sender: UITextField) {
         lesson?.teacher = sender.text ?? ""
         save()
     }
     
-    @IBAction func roomEdited(sender: UITextField) {
+    @IBAction func roomEdited(_ sender: UITextField) {
         lesson?.room = sender.text ?? ""
         save()
     }
@@ -121,7 +121,7 @@ class EditView: UIView {
         delegate.saveContext()
     }
     
-    @IBAction func dismissView(sender: UIButton) {
+    @IBAction func dismissView(_ sender: UIButton) {
         ((delegate.window?.rootViewController as! UINavigationController).viewControllers.first as! ViewController).dismissEditor()
         
         self.fadeOut(){
@@ -129,19 +129,19 @@ class EditView: UIView {
         }
     }
 
-    @IBAction func editToggle(sender: UIButton) {
+    @IBAction func editToggle(_ sender: UIButton) {
         
-        subjectTextField.hidden = false
-        teacherTextField.hidden = false
-        roomTextField.hidden = false
+        subjectTextField.isHidden = false
+        teacherTextField.isHidden = false
+        roomTextField.isHidden = false
         
         sender.removeFromSuperview()
     }
     
     @IBAction func focus(){
-        UIView.animateWithDuration(0.2){
-            self.center.y = UIScreen.mainScreen().bounds.size.height*0.3
-        }
+        UIView.animate(withDuration: 0.2, animations: {
+            self.center.y = UIScreen.main.bounds.size.height*0.3
+        })
         
     }
     

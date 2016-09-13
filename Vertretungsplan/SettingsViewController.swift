@@ -27,7 +27,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     override func viewDidLoad() {
         do{
-            let users = try managedObjectContext.executeFetchRequest(NSFetchRequest(entityName: "User")) as! [User]
+            let r: NSFetchRequest<User> = NSFetchRequest(entityName: "User")
+            let users = try managedObjectContext.fetch(r)
             user = users[0]
         }catch{
             print(error)
@@ -40,11 +41,11 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             ret, notification in
             
             if let n = notification{
-                self.navigationController?.popViewControllerAnimated(true)
+                _ = self.navigationController?.popViewController(animated:true)
                 
-                let alert = UIAlertController(title: "Verbindungsfehler", message: n, preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler: nil))
-                self.navigationController?.presentViewController(alert, animated: true, completion: nil)
+                let alert = UIAlertController(title: "Verbindungsfehler", message: n, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                self.navigationController?.present(alert, animated: true, completion: nil)
                 
                 return
             }
@@ -55,7 +56,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             self.pickerView.reloadAllComponents()
             let usersSchoolId = self.user?.schoolid
             
-            for (i,s) in self.schools.enumerate() {
+            for (i,s) in self.schools.enumerated() {
                 if (s.id == usersSchoolId){
                     self.pickerView.selectRow(i, inComponent: 0, animated: true)
                     self.schoolNameLabel.text = "Schule:  \n"+s.name
@@ -64,11 +65,11 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         if (schools.count == 0){
             return
         }
-        let selected = schools[pickerView.selectedRowInComponent(0)]
+        let selected = schools[pickerView.selectedRow(inComponent: 0)]
         user?.schoolid = selected.id
         user?.schoollink = selected.link
         user?.schoolname = selected.name
@@ -77,19 +78,19 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         delegate.saveContext()
     }
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return schools.count
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return schools[row].name
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print(row)
         
         schoolNameLabel.text = "Schule:  \n"+schools[row].name
@@ -97,7 +98,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         delegate.saveContext()
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.navigationItem.hidesBackButton = !textFieldsOkay()
 
         
@@ -108,13 +109,13 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             textField.text = ""
             
             //Fade color in and out
-            UIView.animateWithDuration(0.1, animations: {
+            UIView.animate(withDuration: 0.1, animations: {
                 textField.backgroundColor = UIColor.colorFromHex("D05000", alpha: 0.1)
                 }, completion: {
                     bool in
-                    UIView.animateWithDuration(0.1){
-                        textField.backgroundColor = UIColor.clearColor()
-                    }
+                    UIView.animate(withDuration: 0.1, animations: {
+                        textField.backgroundColor = UIColor.clear
+                    })
                 })
             return false
         }

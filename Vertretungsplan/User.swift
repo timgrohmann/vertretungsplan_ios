@@ -36,16 +36,16 @@ class User: NSManagedObject{
         return UIColor.colorFromHex(textOnSecondaryColor)
     }
     
-    func loadSchoolProperties(completion: (notification: String?)->()){
+    func loadSchoolProperties(_ completion: @escaping (_ notification: String?)->()){
         
-        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
-        let task = session.dataTaskWithURL(NSURL(string: schoollink)!){
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        let task = session.dataTask(with: URL(string: schoollink)!, completionHandler: {
             dataOpt, response, error in
             
-            dispatch_async(dispatch_get_main_queue()){
+            DispatchQueue.main.async{
                 if let data = dataOpt{
-                    if let school = (try? NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)){
-                        if let name = school["name"] as? String, link = school["link"] as? String, primary = school["primaryColor"] as? String, secondary = school["secondaryColor"] as? String, textColor = school["textColor"] as? String, secText = school["textOnSec"] as? String{
+                    if let school = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String:Any]{
+                        if let name = school["name"] as? String, let link = school["link"] as? String, let primary = school["primaryColor"] as? String, let secondary = school["secondaryColor"] as? String, let textColor = school["textColor"] as? String, let secText = school["textOnSec"] as? String{
                             
                             self.schoolname = name
                             self.timetablelink = link
@@ -54,22 +54,22 @@ class User: NSManagedObject{
                             self.textColor = textColor
                             self.textOnSecondaryColor = secText
                             delegate.saveContext()
-                            completion(notification: nil)
+                            completion(nil)
                         }
                     }else{
-                        if (response as? NSHTTPURLResponse)?.statusCode == 404{
-                            completion(notification: "Die Schuleigenschaften konnten nicht von '"+self.schoollink+"' abgerufen werden, öffne die Einstellungen um deine Schule erneut einzurichten.")
+                        if (response as? HTTPURLResponse)?.statusCode == 404{
+                            completion("Die Schuleigenschaften konnten nicht von '"+self.schoollink+"' abgerufen werden, öffne die Einstellungen um deine Schule erneut einzurichten.")
                         }else{
-                            completion(notification: "\""+self.schoollink + "\" ist keine gültige JSON-Datei.")
+                            completion("\""+self.schoollink + "\" ist keine gültige JSON-Datei.")
                         }
                         
                     }
                 }else{
-                    completion(notification: "Serververbindung fehlgeschlagen")
+                    completion("Serververbindung fehlgeschlagen")
                 }
             }
             
-        }
+        })
         
         task.resume()
         

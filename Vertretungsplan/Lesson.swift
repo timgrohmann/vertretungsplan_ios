@@ -20,11 +20,11 @@ class Lesson: NSManagedObject{
     @NSManaged var day: Day
     
     
-    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
-        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
     }
     
-    func setHourString(s:String){
+    func setHourString(_ s:String){
         if let i = Int(s){
             self.hour = i;
         }

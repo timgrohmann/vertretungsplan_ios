@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 
 var delegate: AppDelegate{
-    return UIApplication.sharedApplication().delegate as! AppDelegate
+    return UIApplication.shared.delegate as! AppDelegate
 }
 
 var managedObjectContext: NSManagedObjectContext{

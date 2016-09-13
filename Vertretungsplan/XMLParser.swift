@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-class XMLParser: NSObject, NSXMLParserDelegate{
-    var parser: NSXMLParser?
+class XMLParser: NSObject, XMLParserDelegate{
+    var parser: Foundation.XMLParser?
     var url: String
     var parsed: NSDictionary = NSDictionary()
     var callback: (XMLTimeTableData)->()
@@ -38,7 +38,7 @@ class XMLParser: NSObject, NSXMLParserDelegate{
     var day: Int?
     
     
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]){
+    func parser(_ parser: Foundation.XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]){
     
         switch elementName{
         case "aktion":
@@ -79,7 +79,7 @@ class XMLParser: NSObject, NSXMLParserDelegate{
         
     }
     
-    func parser(parser: NSXMLParser, foundCharacters string: String) {
+    func parser(_ parser: Foundation.XMLParser, foundCharacters string: String) {
        
         
         if inHour{
@@ -112,7 +112,7 @@ class XMLParser: NSObject, NSXMLParserDelegate{
         
     }
     
-    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    func parser(_ parser: Foundation.XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         
         switch elementName{
         case "aktion":
@@ -141,7 +141,7 @@ class XMLParser: NSObject, NSXMLParserDelegate{
         case "titel":
             inTitle = false
                         
-            let dayName = title.componentsSeparatedByString(",")[0]
+            let dayName = title.components(separatedBy: ",")[0]
             let days = ["Montag":0,"Dienstag":1,"Mittwoch":2,"Donnerstag":3,"Freitag":4]
             
             day = days[dayName]
@@ -160,34 +160,34 @@ class XMLParser: NSObject, NSXMLParserDelegate{
         }
     }
     
-    func parserDidEndDocument(parser: NSXMLParser) {
+    func parserDidEndDocument(_ parser: Foundation.XMLParser) {
         let data = XMLTimeTableData(changedLessons: lessons, schoolName: schoolName, lastRefreshed: lastRefreshed)
         self.callback(data)
         
     }
     
-    func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError) {
+    func parser(_ parser: Foundation.XMLParser, parseErrorOccurred parseError: Error) {
         callback(XMLTimeTableData(changedLessons: [], schoolName: "", lastRefreshed: "Vertretungsplan hat falsches Dateiformat. Bitte melde dich bei deiner Schule."))
         //reset callback to stop recalling it with parserDidEndDocument:
         self.callback = {_ in}
     }
     
-    init(url: String, callback: (XMLTimeTableData)->()) {
+    init(url: String, callback: @escaping (XMLTimeTableData)->()) {
         
         self.url = url
         self.callback = callback
         super.init()
         
-        if let nsurl = NSURL(string: url){
+        if let nsurl = URL(string: url){
             
-            let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
-            let task = session.dataTaskWithURL(nsurl){
+            let session = URLSession(configuration: URLSessionConfiguration.default)
+            let task = session.dataTask(with: nsurl, completionHandler: {
                 data, response, error in
                 if let error = error{
                     callback(XMLTimeTableData(changedLessons: [], schoolName: "", lastRefreshed: "Vertretungsplan konnte nicht geladen werden. "+error.localizedDescription))
                 }
                 
-                if let r = response as? NSHTTPURLResponse{
+                if let r = response as? HTTPURLResponse{
                     
                     switch r.statusCode{
                     case 200:
@@ -202,12 +202,12 @@ class XMLParser: NSObject, NSXMLParserDelegate{
                 }
                 
                 if let data = data{
-                    self.parser = NSXMLParser(data: data)
+                    self.parser = Foundation.XMLParser(data: data)
                     self.parser?.delegate = self
                     self.parser?.parse()
                 }
                 
-            }
+            })
             task.resume()
         }else{
             callback(XMLTimeTableData(changedLessons: [], schoolName: "", lastRefreshed: "'"+url+"' ist kein gültiger Link"))

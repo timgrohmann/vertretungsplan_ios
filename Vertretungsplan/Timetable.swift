@@ -18,10 +18,10 @@ class Timetable{
     
     init(){
         
-        let daysFetch = NSFetchRequest(entityName: "Day")
+        let daysFetch: NSFetchRequest<Day> = NSFetchRequest(entityName: "Day")
         
         do {
-            days = try managedObjectContext.executeFetchRequest(daysFetch) as! [Day]
+            days = try managedObjectContext.fetch(daysFetch)
         } catch {
             fatalError("Failed to fetch days: \(error)")
         }
@@ -29,10 +29,10 @@ class Timetable{
         if days.count == 0 {
             print("No days-->add days")
             
-            let entity = NSEntityDescription.entityForName("Day", inManagedObjectContext: managedObjectContext)
+            let entity = NSEntityDescription.entity(forEntityName: "Day", in: managedObjectContext)
             
             for i in 0..<5{
-                let d = Day(entity: entity!, insertIntoManagedObjectContext: managedObjectContext)
+                let d = Day(entity: entity!, insertInto: managedObjectContext)
                 d.number = i
             }
             
@@ -41,17 +41,17 @@ class Timetable{
         delegate.saveContext()
         
         do {
-            days = try managedObjectContext.executeFetchRequest(daysFetch) as! [Day]
+            days = try managedObjectContext.fetch(daysFetch)
         } catch {
             fatalError("Failed to fetch days: \(error)")
         }
         
         for day in days{
             if day.lessons.count == 0{
-                let entity = NSEntityDescription.entityForName("Lesson", inManagedObjectContext: managedObjectContext)
+                let entity = NSEntityDescription.entity(forEntityName: "Lesson", in: managedObjectContext)
                 print("no lessons for day "+String(day.number))
                 for i in 1...8{
-                    let l = Lesson(entity: entity!, insertIntoManagedObjectContext: managedObjectContext)
+                    let l = Lesson(entity: entity!, insertInto: managedObjectContext)
                     l.hour = i
                     l.info = ""
                     l.klasse = ""
@@ -68,8 +68,8 @@ class Timetable{
 
     }
     
-    func getLessonForIndexPath(indexPath: NSIndexPath)->Lesson?{
-        if let day = dayForNumber(indexPath.section), let lesson = lessonForHour(indexPath.row, forDay: day){
+    func getLessonForIndexPath(_ indexPath: IndexPath)->Lesson?{
+        if let day = dayForNumber((indexPath as NSIndexPath).section), let lesson = lessonForHour((indexPath as NSIndexPath).row, forDay: day){
             return lesson
         }
         
@@ -78,7 +78,7 @@ class Timetable{
     
     
     
-    func dayForNumber(n: Int) -> Day?{
+    func dayForNumber(_ n: Int) -> Day?{
         var day: Day?
         for d in days{
             if d.number == n{
@@ -88,7 +88,7 @@ class Timetable{
         return day
     }
     
-    func lessonForHour(n: Int, forDay day: Day) -> Lesson?{
+    func lessonForHour(_ n: Int, forDay day: Day) -> Lesson?{
         var lesson: Lesson?
         for l in day.lessons{
             if l.hour == n{

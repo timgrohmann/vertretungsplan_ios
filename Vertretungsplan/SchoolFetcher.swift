@@ -14,35 +14,35 @@ class SchoolFetcher{
     var schools: [School] = []
     var url = "https://146programming.de/vp/schools.json"
     
-    func fetch(completion:(successful: [School], notification: String?)->()){
-        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+    func fetch(_ completion:@escaping (_ successful: [School], _ notification: String?)->()){
+        let session = URLSession(configuration: URLSessionConfiguration.default)
         var ret: [School] = []
-        let task = session.dataTaskWithURL(NSURL(string: url)!){
+        let task = session.dataTask(with: URL(string: url)!, completionHandler: {
             dataOpt, response, error in
             
             
             
             if let data = dataOpt{
-                if let json = (try? NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)) as? [AnyObject]{
+                if let json = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [AnyObject]{
                     for school in json{
-                        if let name = school["name"] as? String, link = school["link"] as? String, id = school["id"] as? Int{
+                        if let name = school["name"] as? String, let link = school["link"] as? String, let id = school["id"] as? Int{
                             
                             ret.append(School(link: link, name: name, id: id))
                                                         
                         }
                     }
-                    dispatch_async(dispatch_get_main_queue()){
-                        completion(successful: ret, notification: nil)
+                    DispatchQueue.main.async{
+                        completion(ret, nil)
                         return
                     }
                 }
             }else{
-                dispatch_async(dispatch_get_main_queue()){
-                    completion(successful: ret, notification: "Verbindung zum Hauptserver konnte nicht aufgebaut werden.")
+                DispatchQueue.main.async{
+                    completion(ret, "Verbindung zum Hauptserver konnte nicht aufgebaut werden.")
                 }
             }
             
-        }
+        })
         
         task.resume()
     }

@@ -23,7 +23,7 @@ class ChangedLesson: Equatable{
     var hour: Int?
     
     var identifier: String{
-        return subject+teacher+room+rawKlasse+info+String(day)+String(hour)
+        return subject+teacher+room+rawKlasse+info+String(describing: day)+String(describing: hour)
     }
     
     init(subject: String, teacher: String, room: String, klasse: String, info: String, day: Int, hour: Int) {
@@ -43,7 +43,7 @@ class ChangedLesson: Equatable{
         self.subject = klasse?.kurs ?? self.subject
     }
     
-    func applies(lesson: Lesson, user: User)->Bool{
+    func applies(_ lesson: Lesson, user: User)->Bool{
         
         let myKlasse = KlasseDescription(stufe: user.klassenstufe, kurs: user.klasse)
         

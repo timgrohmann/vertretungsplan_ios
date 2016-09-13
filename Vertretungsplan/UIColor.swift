@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIColor{
-    class func colorFromHex(hex: String) -> UIColor?{
+    class func colorFromHex(_ hex: String) -> UIColor?{
         if hex.characters.count != 6 {return nil} //Not formatted correctly
         
         guard let rgb = Int(hex, radix: 16) else {return nil}
@@ -22,7 +22,7 @@ extension UIColor{
         return UIColor(red: r, green: g, blue: b, alpha: 1)
     }
     
-    class func colorFromHex(hex: String, alpha: Float) -> UIColor?{
+    class func colorFromHex(_ hex: String, alpha: Float) -> UIColor?{
         if hex.characters.count != 6 {return nil} //Not formatted correctly
         
         guard let rgb = Int(hex, radix: 16) else {return nil}

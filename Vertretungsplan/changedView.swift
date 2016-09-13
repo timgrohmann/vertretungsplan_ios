@@ -12,18 +12,18 @@ class ChangedView: UIView {
 
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        let context = UIGraphicsGetCurrentContext()
+    override func draw(_ rect: CGRect) {
+        let context = UIGraphicsGetCurrentContext()!
         
-        CGContextSetStrokeColorWithColor(context, UIColor.redColor().CGColor)
-        CGContextSetFillColorWithColor(context, UIColor.colorFromHex("DC3023")!.CGColor)
+        context.setStrokeColor(UIColor.red.cgColor)
+        context.setFillColor(UIColor.colorFromHex("DC3023")!.cgColor)
         
-        CGContextMoveToPoint(context, 0, 0)
-        CGContextAddLineToPoint(context, rect.width, rect.height/2)
-        CGContextAddLineToPoint(context, 0, rect.height)
-        CGContextAddLineToPoint(context, 0, 0)
+        context.move(to: CGPoint(x: 0, y: 0))
+        context.addLine(to: CGPoint(x: rect.width, y: rect.height/2))
+        context.addLine(to: CGPoint(x: 0, y: rect.height))
+        context.addLine(to: CGPoint(x: 0, y: 0))
         
-        CGContextFillPath(context);
+        context.fillPath();
     }
 
 }

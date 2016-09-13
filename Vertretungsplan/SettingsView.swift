@@ -26,37 +26,37 @@ class SettingsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         }*/
     }
     
-    @IBAction func classTextFieldEditingDidEnd(sender: AnyObject) {
+    @IBAction func classTextFieldEditingDidEnd(_ sender: AnyObject) {
         
     }
     
-    func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         return 100.0
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return schools.count
     }
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 50.0
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return schools[row].name
     }
     
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         if let v = view as? UILabel{
             v.text = schools[row].name
             return v
         } else {
             let view = UILabel()
-            view.bounds = CGRectMake(0, 0, 200, 50)
+            view.bounds = CGRect(x: 0, y: 0, width: 200, height: 50)
             return view
         }
     }

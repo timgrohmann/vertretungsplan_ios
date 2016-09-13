@@ -18,15 +18,15 @@ class ChangedTimetable{
     var loaded = false
     var user: User?{
         do{
-            let us = try managedObjectContext.executeFetchRequest(NSFetchRequest(entityName: "User")) as! [User]
-            return us[0]
+            let us = try managedObjectContext.fetch(NSFetchRequest(entityName: "User"))
+            return us[0] as? User
         }catch{
             print(error)
         }
         return nil
     }
     
-    func load(completion: ()->()){
+    func load(_ completion: @escaping ()->()){
         
         guard let user = user else{
             return
@@ -37,7 +37,7 @@ class ChangedTimetable{
             self.data = data
             self.loaded = true
             
-            dispatch_async(dispatch_get_main_queue()){
+            DispatchQueue.main.async{
                 self.refreshChanged()
                 completion()
             }
@@ -49,10 +49,10 @@ class ChangedTimetable{
         applyingLessons = []
         var allLessons: [Lesson] = []
         for day in timetable.days{
-            allLessons.appendContentsOf(day.lessons)
+            allLessons.append(contentsOf: day.lessons)
         }
         
-        if let d = data, u = user{
+        if let d = data, let u = user{
             for changedLesson in d.changedLessons{
                 for lesson in allLessons{
                     if changedLesson.applies(lesson,user: u) {
@@ -67,7 +67,7 @@ class ChangedTimetable{
         print("Number of changes that apply:  "+String(applyingLessons.count))
     }
     
-    func getChange(lesson: Lesson) -> ChangedLesson?{
+    func getChange(_ lesson: Lesson) -> ChangedLesson?{
         for changedLesson in applyingLessons{
             if(changedLesson.day == lesson.day.number && changedLesson.hour == lesson.hour){
                 return changedLesson
