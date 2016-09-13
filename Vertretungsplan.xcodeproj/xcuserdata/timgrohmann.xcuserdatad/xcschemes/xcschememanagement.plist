@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>TimetableWidget.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>Vertretungsplan.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>1814439E1D8063B300991597</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>189AB6B31D0C1C0E002C3526</key>
 		<dict>
 			<key>primary</key>
