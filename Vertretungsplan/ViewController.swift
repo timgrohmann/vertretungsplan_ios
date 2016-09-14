@@ -39,7 +39,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let userFetch: NSFetchRequest<User> = NSFetchRequest(entityName: "User")
         
-
         
         do {
             let users = try managedObjectContext.fetch(userFetch)
@@ -86,7 +85,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func loadImage(){
         let url = "https://fahrradcenter-bernburg.de/wp-content/themes/design/img/schloss_saale.jpg"
         
-        let task = URLSession(configuration: URLSessionConfiguration.default).dataTask(with: URLRequest(url: URL(string: url)!), completionHandler: {
+        let task = URLSession(configuration: .default).dataTask(with: URLRequest(url: URL(string: url)!), completionHandler: {
             data,error,_ in
             
             if let imageData = data{
@@ -107,6 +106,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     self.view.insertSubview(self.imageView!, belowSubview: effectView)
                     self.scrollViewDidScroll(self.collectionView)
                 }
+                
             }
         })
         

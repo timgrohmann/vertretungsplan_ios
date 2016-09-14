@@ -13,7 +13,6 @@ class User: NSManagedObject{
     @NSManaged var klassenstufe: String
     @NSManaged var klasse: String
     
-    
     @NSManaged var schoollink: String
     @NSManaged var timetablelink: String
     @NSManaged var schoolname: String
