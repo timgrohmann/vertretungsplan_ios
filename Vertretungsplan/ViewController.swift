@@ -61,14 +61,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             fatalError("User could not be fetched/created: \(error)")
         }
         
-        reloadAll()
 
-        
-        
         let color = UIColor.colorFromHex(c)
-        print(color)
         self.navigationController?.navigationBar.barTintColor = color
         
+        reloadAll()
         loadImage()
         
     }
@@ -106,12 +103,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     self.view.insertSubview(self.imageView!, belowSubview: effectView)
                     self.scrollViewDidScroll(self.collectionView)
                 }
-                
             }
         })
-        
         task.resume()
-        
     }
     
     func reloadAll(){
