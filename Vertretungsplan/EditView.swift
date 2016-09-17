@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditView: UIView {
+class EditView: UIView, Fadable {
 
     @IBOutlet weak var descriptionLabel: UILabel!
     
@@ -33,7 +33,7 @@ class EditView: UIView {
     
     let changedTimetable = ((delegate.window?.rootViewController as! UINavigationController).viewControllers.first as! ViewController).changedTimetable
     
-    var fadingView: UICollectionViewCell?
+    var fadingView: UIView = UIView()
     
     func sLesson(_ lesson: Lesson){
         self.lesson = lesson
@@ -65,64 +65,16 @@ class EditView: UIView {
         }
     }
     
-    func fadeIn(_ start: UICollectionViewCell, size: CGSize){
-        
-        self.fadingView = start
-        
-        self.center = start.center
-        self.center.x -= ((start.superview as? UIScrollView)?.contentOffset.x ?? 0)
-        
-        self.bounds = start.bounds
-        self.clipsToBounds = true
-        self.layoutIfNeeded()
-        self.alpha = 0
-        self.layer.cornerRadius = 10
-        
-        UIView.animate(withDuration: 0.2, animations: {
-            self.alpha = 1
-            self.center = CGPoint(x: size.width*0.5, y: size.height*0.5)
-            self.bounds = CGRect(x: 0,y: 0, width: size.width - 40, height: size.height*0.4)
-            self.layoutIfNeeded()
-        })
-    }
-    
-    func fadeOut(_ completion: @escaping ()->()){
-        
-        guard let end = fadingView else {return}
-        
-        UIView.animate(withDuration: 0.2, animations: {
-            self.center = end.center
-            self.center.x -= ((end.superview as? UIScrollView)?.contentOffset.x ?? 0)
-            self.bounds = end.bounds
-            self.alpha = 0.0
-            self.layoutIfNeeded()
-        }, completion: {
-            finished in
-            completion()
-        })
-    }
-    
-    @IBAction func subjectEdited(_ sender: UITextField) {
-        lesson?.subject = sender.text ?? ""
-        save()
-    }
-    
-    @IBAction func teacherEdited(_ sender: UITextField) {
-        lesson?.teacher = sender.text ?? ""
-        save()
-    }
-    
-    @IBAction func roomEdited(_ sender: UITextField) {
-        lesson?.room = sender.text ?? ""
-        save()
-    }
-    
     func save(){
+        lesson?.subject = subjectTextField.text ?? ""
+        lesson?.teacher = teacherTextField.text ?? ""
+        lesson?.room = roomTextField.text ?? ""
         delegate.saveContext()
     }
     
     @IBAction func dismissView(_ sender: UIButton) {
         ((delegate.window?.rootViewController as! UINavigationController).viewControllers.first as! ViewController).dismissEditor()
+        save()
         
         self.fadeOut(){
             self.removeFromSuperview()
