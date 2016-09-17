@@ -9,18 +9,24 @@
 import Foundation
 import UIKit
 
-
+/**
+ The _Fadable_ protocol is used to fade views in/out from/to a specified area.
+ - fadingView: Used to store location of start/end point. Initialize to UIView()
+ */
 protocol Fadable {
     var fadingView: UIView {get set}
 }
 extension Fadable where Self: UIView{
-    func fadeIn(_ start: UIView, size: CGSize){
+    
+    func fadeIn(from start: UIView, size: CGSize){
         
         self.center = start.center
         self.center.x -= ((start.superview as? UIScrollView)?.contentOffset.x ?? 0)
         self.center.y += start.superview!.frame.origin.y
         
         self.bounds = start.bounds
+        fadingView.frame = self.frame
+        
         self.clipsToBounds = true
         self.layoutIfNeeded()
         self.alpha = 0
@@ -33,7 +39,7 @@ extension Fadable where Self: UIView{
             self.layoutIfNeeded()
         })
         
-        fadingView.frame = start.frame
+        
 
     }
     
@@ -41,7 +47,6 @@ extension Fadable where Self: UIView{
         
         UIView.animate(withDuration: 0.2, animations: {
             self.center = self.fadingView.center
-            self.center.x -= ((self.fadingView.superview as? UIScrollView)?.contentOffset.x ?? 0)
             self.bounds = self.fadingView.bounds
             self.alpha = 0.0
             self.layoutIfNeeded()

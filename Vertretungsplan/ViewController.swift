@@ -49,6 +49,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 
                 user = User(entity: NSEntityDescription.entity(forEntityName: "User", in: managedObjectContext)! , insertInto: managedObjectContext)
                 self.performSegue(withIdentifier: "settingsSegue", sender: nil)
+                return
             }else{
                 user = users[0]
                 if user?.schoolid == nil{
@@ -157,7 +158,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "lesson", for: indexPath)
         
-        let lesson = timetable.getLessonForIndexPath(IndexPath(row: (indexPath as NSIndexPath).row+1, section: (indexPath as NSIndexPath).section))!
+        let lesson = timetable.getLessonForIndexPath(IndexPath(row: indexPath.row+1, section: indexPath.section))!
         
         let change = changedTimetable.getChange(lesson)
         
@@ -225,7 +226,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         guard let startView = collectionView.cellForItem(at: indexPath) else {return}
         
-        view.fadeIn(startView,size: self.view.frame.size)
+        view.fadeIn(from: startView,size: self.view.frame.size)
         let dbIndexPath = IndexPath(row: (indexPath as NSIndexPath).row+1, section: (indexPath as NSIndexPath).section)
         view.sLesson(timetable.getLessonForIndexPath(dbIndexPath)!)
         
@@ -245,9 +246,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func dismissEditor(){
         
-        self.collectionView.reloadData()
         self.collectionView.isUserInteractionEnabled = true
         self.changedTimetable.refreshChanged()
+        self.collectionView.reloadData()
+        
     }
     
     func scrollToCurrentDay(){
