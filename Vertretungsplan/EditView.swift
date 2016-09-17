@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditView: UIView {
+class EditView: UIView, Fadable {
 
     @IBOutlet weak var descriptionLabel: UILabel!
     
@@ -33,7 +33,7 @@ class EditView: UIView {
     
     let changedTimetable = ((delegate.window?.rootViewController as! UINavigationController).viewControllers.first as! ViewController).changedTimetable
     
-    var fadingView: UICollectionViewCell?
+    var fadingView: UIView = UIView()
     
     func sLesson(_ lesson: Lesson){
         self.lesson = lesson
@@ -65,12 +65,13 @@ class EditView: UIView {
         }
     }
     
-    func fadeIn(_ start: UICollectionViewCell, size: CGSize){
+    /*func fadeIn(_ start: UIView, size: CGSize){
         
         self.fadingView = start
         
         self.center = start.center
         self.center.x -= ((start.superview as? UIScrollView)?.contentOffset.x ?? 0)
+        self.center.y += start.superview!.frame.origin.y
         
         self.bounds = start.bounds
         self.clipsToBounds = true
@@ -100,7 +101,7 @@ class EditView: UIView {
             finished in
             completion()
         })
-    }
+    }*/
     
     @IBAction func subjectEdited(_ sender: UITextField) {
         lesson?.subject = sender.text ?? ""
