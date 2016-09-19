@@ -32,7 +32,7 @@ class ChangedTimetable{
             return
         }
         
-        parser = XMLParser(url: user.timetablelink){
+        parser = XMLParser(url: user.school!.timetablelink){
             data in
             self.data = data
             self.loaded = true

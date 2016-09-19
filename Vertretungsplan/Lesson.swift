@@ -19,6 +19,9 @@ class Lesson: NSManagedObject{
     @NSManaged var info: String
     @NSManaged var day: Day
     
+    var connectedToTop: Bool = false
+    var connectedBottom: Bool = false
+    
     
     override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto: context)

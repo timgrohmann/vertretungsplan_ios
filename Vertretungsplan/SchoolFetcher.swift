@@ -11,12 +11,12 @@ import Foundation
 import CoreData
 
 class SchoolFetcher{
-    var schools: [School] = []
+    var schools: [SchoolSummary] = []
     var url = "https://146programming.de/vp/schools.json"
     
-    func fetch(_ completion:@escaping (_ successful: [School], _ notification: String?)->()){
+    func fetch(_ completion:@escaping (_ successful: [SchoolSummary], _ notification: String?)->()){
         let session = URLSession(configuration: URLSessionConfiguration.default)
-        var ret: [School] = []
+        var ret: [SchoolSummary] = []
         let task = session.dataTask(with: URL(string: url)!, completionHandler: {
             dataOpt, response, error in
             
@@ -27,7 +27,7 @@ class SchoolFetcher{
                     for school in json{
                         if let name = school["name"] as? String, let link = school["link"] as? String, let id = school["id"] as? Int{
                             
-                            ret.append(School(link: link, name: name, id: id))
+                            ret.append(SchoolSummary(link: link, name: name, id: id))
                                                         
                         }
                     }
@@ -46,4 +46,10 @@ class SchoolFetcher{
         
         task.resume()
     }
+}
+
+struct SchoolSummary{
+    var link: String
+    var name: String
+    var id: Int
 }
