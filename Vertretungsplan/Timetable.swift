@@ -53,8 +53,7 @@ class Timetable{
                 for i in 1...8{
                     let l = Lesson(entity: entity!, insertInto: managedObjectContext)
                     l.hour = i
-                    l.info = ""
-                    l.klasse = ""
+                    l.course = ""
                     l.room = ""
                     l.subject = ""
                     l.teacher = ""

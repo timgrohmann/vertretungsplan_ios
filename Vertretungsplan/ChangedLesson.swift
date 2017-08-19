@@ -15,22 +15,21 @@ class ChangedLesson: Equatable{
     var subject: String = ""
     var teacher: String = ""
     var room: String = ""
-    var rawKlasse: String = ""
-    var klasse: Klasse?
+    var course: String = ""
     var info: String = ""
     
     var day: Int?
     var hour: Int?
     
     var identifier: String{
-        return subject+teacher+room+rawKlasse+info+String(describing: day)+String(describing: hour)
+        return subject+teacher+room+course+info+String(describing: day)+String(describing: hour)
     }
     
-    init(subject: String, teacher: String, room: String, klasse: String, info: String, day: Int, hour: Int) {
+    init(subject: String, teacher: String, room: String, course: String, info: String, day: Int, hour: Int) {
         self.subject = subject
         self.teacher = teacher
         self.room = room
-        self.rawKlasse = klasse
+        self.course = course
         self.info = info
         self.day = day
         self.hour = hour
@@ -38,25 +37,15 @@ class ChangedLesson: Equatable{
     
     init(){}
     
-    func parsed(){
-        self.klasse = Klasse(descKl: rawKlasse, descLe: subject)
-        self.subject = klasse?.kurs ?? self.subject
-    }
-    
     func applies(_ lesson: Lesson, user: User)->Bool{
         
-        let myKlasse = KlasseDescription(stufe: user.klassenstufe, kurs: user.klasse)
-        
-        if klasse?.applies(myKlasse, subj: lesson.subject) ?? false{
+        if (course.lowercased() ==  lesson.course.lowercased()){
             return true
         }
         
-        if klasse?.klassen.count == 1 && klasse?.klassen[0] == myKlasse{
+        /*if klasse?.klassen.count == 1 && klasse?.klassen[0] == myKlasse{
             return true
-        }
-        
-        
-        
+        }*/
         
         return false
     }

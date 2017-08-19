@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16A323" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="1.1">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16D32" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="1.1">
     <entity name="Day" representedClassName=".Day" syncable="YES">
         <attribute name="number" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="lessons" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Lesson" inverseName="day" inverseEntity="Lesson" syncable="YES"/>
     </entity>
     <entity name="Lesson" representedClassName=".Lesson" syncable="YES">
+        <attribute name="course" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
         <attribute name="hour" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="info" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="klasse" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
         <attribute name="room" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="subject" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="teacher" optional="YES" attributeType="String" syncable="YES"/>
@@ -40,9 +39,9 @@
     </entity>
     <elements>
         <element name="Day" positionX="144" positionY="-18" width="128" height="73"/>
-        <element name="Lesson" positionX="-72" positionY="-18" width="128" height="150"/>
-        <element name="User" positionX="79" positionY="288" width="128" height="88"/>
+        <element name="Lesson" positionX="-72" positionY="-18" width="128" height="133"/>
         <element name="School" positionX="-92" positionY="239" width="128" height="193"/>
         <element name="TimeSchemeLesson" positionX="-261" positionY="261" width="128" height="135"/>
+        <element name="User" positionX="79" positionY="288" width="128" height="88"/>
     </elements>
 </model>

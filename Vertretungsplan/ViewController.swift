@@ -23,7 +23,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var c = "CCCCCC"
     var user: User?
     
-    
+    var wde: WatchDataExtension {
+        return delegate.watchDataExtension
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +71,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         reloadAll()
         loadImage()
         
+        
+        wde.sendWatchData(timetable: timetable, timescheme: Array(user?.school?.timeschemes ?? []))
     }
 
     override func didReceiveMemoryWarning() {
@@ -167,7 +171,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         (cell.viewWithTag(2) as! UILabel).text = lesson.subject
         (cell.viewWithTag(3) as! UILabel).text = lesson.teacher
         (cell.viewWithTag(4) as! UILabel).text = lesson.room
-        (cell.viewWithTag(5) as! UILabel).text = lesson.info
+        (cell.viewWithTag(5) as! UILabel).text = ""
         
         for i in 1...5{
             (cell.viewWithTag(i) as! UILabel).textColor = UIColor.black
@@ -189,10 +193,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 (cell.viewWithTag(4) as! UILabel).text = c.room
                 (cell.viewWithTag(4) as! UILabel).textColor = UIColor.red
             }
-            if (c.info != lesson.info){
-                (cell.viewWithTag(5) as! UILabel).text = c.info
-                (cell.viewWithTag(5) as! UILabel).textColor = UIColor.red
-            }
+            
+            (cell.viewWithTag(5) as! UILabel).text = c.info
+            (cell.viewWithTag(5) as! UILabel).textColor = UIColor.red
             
             let scheme = user?.school!.getTimeScheme(for: (indexPath as NSIndexPath).row)
             
@@ -201,6 +204,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             no.backgroundColor = UIColor.clear
             cell.addSubview(no)
         }
+        /*cell.layoutIfNeeded()
+        if let constVis = (cell.viewWithTag(5) as! UILabel).superview!.constraints.first(where: { $0.identifier == "ewInfoVis" }) {
+            constVis.isActive = (change?.info) != nil
+        }
+        
+        for con in (cell.viewWithTag(5) as! UILabel).superview!.constraints {
+            print(con.identifier)
+        }*/
+        
+        //let constInVis = (cell.viewWithTag(5) as! UILabel).superview!.constraints.first(where: { $0.identifier == "ewInfoInVis" })!
+        
+        
+        
+        //constInVis.isActive = (change?.info) == nil
         
         return cell
     }

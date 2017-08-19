@@ -15,8 +15,7 @@ class Lesson: NSManagedObject{
     @NSManaged var subject: String
     @NSManaged var teacher: String
     @NSManaged var room: String
-    @NSManaged var klasse: String
-    @NSManaged var info: String
+    @NSManaged var course: String
     @NSManaged var day: Day
     
     var connectedToTop: Bool = false

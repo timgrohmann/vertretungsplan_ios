@@ -99,7 +99,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.navigationItem.hidesBackButton = !textFieldsOkay()
+        /*self.navigationItem.hidesBackButton = !textFieldsOkay()
 
         
         if (Int(textField.text!) != nil && Int(textField.text!) != 0){
@@ -118,7 +118,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
                     })
                 })
             return false
-        }
+        }*/
+        return true
     }
     
     func textFieldsOkay() -> Bool{

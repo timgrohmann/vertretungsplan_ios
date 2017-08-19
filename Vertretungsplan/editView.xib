@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,18 +16,21 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Stunde Montag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9fq-OH-KRt">
+                    <rect key="frame" x="5" y="18.5" width="92" height="13.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Lehrer" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="muw-wj-XIM">
+                    <rect key="frame" x="193.5" y="210" width="153" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                     <connections>
                         <action selector="focus" destination="GcU-d8-onL" eventType="editingDidBegin" id="blH-t8-goY"/>
                     </connections>
                 </textField>
                 <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Raum" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3NM-9i-MjU">
+                    <rect key="frame" x="366.5" y="210" width="153.5" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                     <connections>
@@ -32,6 +38,7 @@
                     </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5SE-C3-0hE">
+                    <rect key="frame" x="489" y="10" width="41" height="30"/>
                     <state key="normal" title="Fertig">
                         <color key="titleColor" red="0.99607843137254903" green="0.84705882352941175" blue="0.38039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
@@ -40,33 +47,39 @@
                     </connections>
                 </button>
                 <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Fach" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="70t-7c-clK">
+                    <rect key="frame" x="20" y="210" width="153.5" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                     <connections>
                         <action selector="focus" destination="GcU-d8-onL" eventType="editingDidBegin" id="bgx-5I-MDS"/>
                     </connections>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keine Vertretung in dieser Stunde" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ds-iT-LiG">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keine Vertretung in dieser Stunde" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ds-iT-LiG">
+                    <rect key="frame" x="20" y="85.5" width="500" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fach" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Cm-Co-EPX">
+                    <rect key="frame" x="20" y="52" width="153.5" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lehrer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1PL-Mm-z8A">
+                    <rect key="frame" x="193.5" y="52" width="153" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Raum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WV8-ah-C2H">
+                    <rect key="frame" x="366.5" y="52" width="153.5" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7SO-wO-LQx">
+                    <rect key="frame" x="237" y="219" width="66" height="28"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <state key="normal" title="Bearbeiten">
                         <color key="titleColor" red="0.99607843139999996" green="0.84705882349999995" blue="0.3803921569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -75,6 +88,15 @@
                         <action selector="editToggle:" destination="GcU-d8-onL" eventType="touchUpInside" id="alL-f6-I7v"/>
                     </connections>
                 </button>
+                <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Kurs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gqV-WQ-uF1">
+                    <rect key="frame" x="20" y="172" width="500" height="30"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="focus" destination="GcU-d8-onL" eventType="editingDidBegin" id="2Ha-tz-zru"/>
+                    </connections>
+                </textField>
             </subviews>
             <color key="backgroundColor" red="0.51372549020000002" green="0.078431372550000003" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -89,6 +111,7 @@
                 <constraint firstAttribute="bottom" secondItem="70t-7c-clK" secondAttribute="bottom" constant="20" id="Jlh-U7-TS7"/>
                 <constraint firstAttribute="bottom" secondItem="7SO-wO-LQx" secondAttribute="bottom" constant="13" id="KEf-iz-CWj"/>
                 <constraint firstItem="5SE-C3-0hE" firstAttribute="top" secondItem="GcU-d8-onL" secondAttribute="top" constant="10" id="L5g-7Y-fcV"/>
+                <constraint firstItem="gqV-WQ-uF1" firstAttribute="leading" secondItem="GcU-d8-onL" secondAttribute="leading" constant="20" id="M7v-uH-0ol"/>
                 <constraint firstItem="1PL-Mm-z8A" firstAttribute="width" secondItem="WV8-ah-C2H" secondAttribute="width" id="MON-DS-EIy"/>
                 <constraint firstItem="muw-wj-XIM" firstAttribute="centerY" secondItem="GcU-d8-onL" secondAttribute="centerY" id="Qx8-p6-WId"/>
                 <constraint firstAttribute="trailing" secondItem="3NM-9i-MjU" secondAttribute="trailing" constant="20" id="XfH-Mb-fIg"/>
@@ -101,11 +124,13 @@
                 <constraint firstItem="9fq-OH-KRt" firstAttribute="leading" secondItem="GcU-d8-onL" secondAttribute="leading" constant="5" id="d9H-xS-z0N"/>
                 <constraint firstAttribute="bottom" secondItem="3NM-9i-MjU" secondAttribute="bottom" constant="20" id="dZz-Mx-M3d"/>
                 <constraint firstAttribute="bottom" secondItem="muw-wj-XIM" secondAttribute="bottom" constant="20" id="eTG-bt-CNJ"/>
+                <constraint firstItem="70t-7c-clK" firstAttribute="top" secondItem="gqV-WQ-uF1" secondAttribute="bottom" constant="8" id="mkd-r7-Kh8"/>
                 <constraint firstItem="0Ds-iT-LiG" firstAttribute="leading" secondItem="GcU-d8-onL" secondAttribute="leading" constant="20" id="mul-nk-ApC"/>
                 <constraint firstItem="9fq-OH-KRt" firstAttribute="leading" secondItem="GcU-d8-onL" secondAttribute="leading" constant="5" id="oBR-MH-GlK"/>
                 <constraint firstAttribute="trailing" secondItem="0Ds-iT-LiG" secondAttribute="trailing" constant="20" id="om0-7f-JYw"/>
                 <constraint firstAttribute="trailing" secondItem="5SE-C3-0hE" secondAttribute="trailing" constant="10" id="qLA-VI-JKd"/>
                 <constraint firstItem="9fq-OH-KRt" firstAttribute="top" secondItem="GcU-d8-onL" secondAttribute="top" constant="5" id="qYk-dr-noQ"/>
+                <constraint firstItem="3NM-9i-MjU" firstAttribute="trailing" secondItem="gqV-WQ-uF1" secondAttribute="trailing" id="wVp-xe-Khj"/>
                 <constraint firstItem="muw-wj-XIM" firstAttribute="leading" secondItem="70t-7c-clK" secondAttribute="trailing" constant="20" id="x7I-AG-idl"/>
                 <constraint firstItem="3Cm-Co-EPX" firstAttribute="top" secondItem="9fq-OH-KRt" secondAttribute="bottom" constant="20" id="x8s-w8-QbN"/>
                 <constraint firstItem="1PL-Mm-z8A" firstAttribute="top" secondItem="9fq-OH-KRt" secondAttribute="bottom" constant="20" id="xHI-FQ-1lL"/>
@@ -131,6 +156,7 @@
                 <outlet property="actualRoom" destination="WV8-ah-C2H" id="89Z-vi-nvy"/>
                 <outlet property="actualSubject" destination="3Cm-Co-EPX" id="8BT-cy-Xjg"/>
                 <outlet property="actualTeacher" destination="1PL-Mm-z8A" id="Cwa-cs-NRt"/>
+                <outlet property="courseTextField" destination="gqV-WQ-uF1" id="NJ0-jJ-Mwk"/>
                 <outlet property="descriptionLabel" destination="9fq-OH-KRt" id="Ady-N9-Ssr"/>
                 <outlet property="editButton" destination="7SO-wO-LQx" id="IjQ-sd-3Tb"/>
                 <outlet property="finishButton" destination="5SE-C3-0hE" id="8kM-fH-7hg"/>
