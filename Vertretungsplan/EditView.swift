@@ -24,6 +24,7 @@ class EditView: UIView, Fadable {
     @IBOutlet weak var actualRoom: UILabel!
     @IBOutlet weak var finishButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var courseTextField: UITextField!
     
     @IBInspectable var attentionColor: UIColor!
     
@@ -44,6 +45,7 @@ class EditView: UIView, Fadable {
         subjectTextField.text = lesson.subject
         teacherTextField.text = lesson.teacher
         roomTextField.text = lesson.room
+        courseTextField.text = lesson.course
         
         descriptionLabel.text = String(lesson.hour) + ". Stunde " + lesson.day.names[lesson.day.number]
         
@@ -69,6 +71,7 @@ class EditView: UIView, Fadable {
         lesson?.subject = subjectTextField.text ?? ""
         lesson?.teacher = teacherTextField.text ?? ""
         lesson?.room = roomTextField.text ?? ""
+        lesson?.course = courseTextField.text ?? ""
         delegate.saveContext()
     }
     
@@ -83,6 +86,7 @@ class EditView: UIView, Fadable {
 
     @IBAction func editToggle(_ sender: UIButton) {
         
+        courseTextField.isHidden = false
         subjectTextField.isHidden = false
         teacherTextField.isHidden = false
         roomTextField.isHidden = false

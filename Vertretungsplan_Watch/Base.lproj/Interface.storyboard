@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="12029"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Vertretungsplan_Watch_Extension">
+                    <items>
+                        <label alignment="left" text="Montag" id="CwA-aT-byI">
+                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                        </label>
+                        <table alignment="left" id="IdZ-jh-yba">
+                            <items>
+                                <tableRow identifier="MainRowType" selectable="NO" id="xfH-CP-RYC" customClass="TimeTableRowController" customModule="Vertretungsplan_Watch_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="Bnj-iM-fzd">
+                                        <items>
+                                            <label width="0.10000000000000001" height="1" alignment="left" text="1" id="dch-Sr-FLy"/>
+                                            <label width="0.40000000000000002" height="1" alignment="left" text="AAA" textAlignment="center" id="jjQ-g5-U7e"/>
+                                            <label width="0.5" height="1" alignment="left" text="S000" textAlignment="center" id="e94-ja-P1k"/>
+                                        </items>
+                                        <color key="backgroundColor" red="0.187137350795756" green="0.04682868111304099" blue="0.11945995992006306" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="hourLabel" destination="dch-Sr-FLy" id="P80-gP-WfP"/>
+                                        <outlet property="roomLabel" destination="e94-ja-P1k" id="fc5-M9-Jre"/>
+                                        <outlet property="subjectLabel" destination="jjQ-g5-U7e" id="z1Y-Ww-BYA"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                            <gestureRecognizers>
+                                <swipeGestureRecognizer id="zWU-dh-M3r">
+                                    <connections>
+                                        <action selector="sweptRight:" destination="AgC-eL-Hgc" id="56w-YK-x0p"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                                <swipeGestureRecognizer direction="2" id="2NQ-LN-3DO">
+                                    <connections>
+                                        <action selector="sweptLeft:" destination="AgC-eL-Hgc" id="K9u-fu-8MN"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                            </gestureRecognizers>
+                        </table>
+                    </items>
+                    <menu key="menu" id="qA1-Zq-M9d">
+                        <items>
+                            <menuItem title="Neu laden" icon="resume" id="vP1-C5-3oE">
+                                <connections>
+                                    <action selector="reloadByMenu" destination="AgC-eL-Hgc" id="mbq-dY-NL3"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="timeTable" destination="IdZ-jh-yba" id="pLJ-Bk-dYA"/>
+                        <outlet property="weekdayLabel" destination="CwA-aT-byI" id="mk3-Ph-lbN"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="220" y="345"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" id="IdU-wH-bcW"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
+                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="220" y="643"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="ZPc-GJ-vnh">
+            <objects>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="Vertretungsplan_Watch" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="468" y="643"/>
+        </scene>
+    </scenes>
+</document>

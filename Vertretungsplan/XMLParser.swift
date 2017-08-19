@@ -95,7 +95,7 @@ class XMLParser: NSObject, XMLParserDelegate{
             lessons.last?.room += string
         }
         if inKlasse{
-            lessons.last?.rawKlasse += string
+            //lessons.last?.rawKlasse += string
         }
         if inInfo{
             lessons.last?.info += string
@@ -117,7 +117,7 @@ class XMLParser: NSObject, XMLParserDelegate{
         switch elementName{
         case "aktion":
             lessons.last?.day = day
-            lessons.last?.parsed()
+            //lessons.last?.parsed()
             inLesson = false
             break
         case "klasse":

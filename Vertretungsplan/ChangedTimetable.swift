@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 
 class ChangedTimetable{
-    var parser: XMLParser?
+    var parser: JSONLoader?
     //var changedLessons: [ChangedLesson] = []
     var applyingLessons: [ChangedLesson] = []
     var data: XMLTimeTableData?
@@ -32,7 +32,7 @@ class ChangedTimetable{
             return
         }
         
-        parser = XMLParser(url: user.timetablelink){
+        parser = JSONLoader(url: user.school!.timetablelink){
             data in
             self.data = data
             self.loaded = true

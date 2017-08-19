@@ -14,6 +14,21 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>Vertretungsplan_Watch (Complication).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>Vertretungsplan_Watch (Notification).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>Vertretungsplan_Watch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -23,6 +38,11 @@
 			<true/>
 		</dict>
 		<key>189AB6B31D0C1C0E002C3526</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>18D333251F45F94A00869F06</key>
 		<dict>
 			<key>primary</key>
 			<true/>

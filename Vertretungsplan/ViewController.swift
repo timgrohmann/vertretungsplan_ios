@@ -23,7 +23,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var c = "CCCCCC"
     var user: User?
     
-    
+    var wde: WatchDataExtension {
+        return delegate.watchDataExtension
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +54,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 return
             }else{
                 user = users[0]
-                if user?.schoolid == nil{
+                if user?.school!.id == nil{
                     self.performSegue(withIdentifier: "settingsSegue", sender: nil)
                 }else{
                     self.reloadAll()
@@ -69,6 +71,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         reloadAll()
         loadImage()
         
+        
+        wde.sendWatchData(timetable: timetable, timescheme: Array(user?.school?.timeschemes ?? []))
     }
 
     override func didReceiveMemoryWarning() {
@@ -112,7 +116,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func reloadAll(){
         
         
-        user?.loadSchoolProperties({
+        user?.school!.loadProperties({
             notification in
             DispatchQueue.main.async{
                 
@@ -138,12 +142,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func loadAllColors(){
         UIView.animate(withDuration: 0.5, animations: {
-            self.navigationController?.navigationBar.barTintColor = self.user?.colorPrimary
-            self.navigationController?.navigationBar.tintColor = self.user?.colorText
-            self.navigationController?.navigationBar.titleTextAttributes?[NSForegroundColorAttributeName] = self.user?.colorText
-            self.view.backgroundColor = self.user?.colorSecondary
-            self.lastChangedLabel.textColor = self.user?.colorTextSecondary
-            self.lastChangedWrapperView.backgroundColor = self.user?.colorSecondary
+            self.navigationController?.navigationBar.barTintColor = self.user?.school!.colorPrimary
+            self.navigationController?.navigationBar.tintColor = self.user?.school!.colorText
+            self.navigationController?.navigationBar.titleTextAttributes?[NSForegroundColorAttributeName] = self.user?.school!.colorText
+            self.view.backgroundColor = self.user?.school!.colorSecondary
+            self.lastChangedLabel.textColor = self.user?.school!.colorTextSecondary
+            self.lastChangedWrapperView.backgroundColor = self.user?.school!.colorSecondary
         })
     }
     
@@ -167,7 +171,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         (cell.viewWithTag(2) as! UILabel).text = lesson.subject
         (cell.viewWithTag(3) as! UILabel).text = lesson.teacher
         (cell.viewWithTag(4) as! UILabel).text = lesson.room
-        (cell.viewWithTag(5) as! UILabel).text = lesson.info
+        (cell.viewWithTag(5) as! UILabel).text = ""
         
         for i in 1...5{
             (cell.viewWithTag(i) as! UILabel).textColor = UIColor.black
@@ -189,16 +193,31 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 (cell.viewWithTag(4) as! UILabel).text = c.room
                 (cell.viewWithTag(4) as! UILabel).textColor = UIColor.red
             }
-            if (c.info != lesson.info){
-                (cell.viewWithTag(5) as! UILabel).text = c.info
-                (cell.viewWithTag(5) as! UILabel).textColor = UIColor.red
-            }
             
-            let no = ChangedView(frame: CGRect(x: 0, y: 0, width: cell.viewWithTag(1)!.frame.origin.x*0.6, height: cell.frame.height))
+            (cell.viewWithTag(5) as! UILabel).text = c.info
+            (cell.viewWithTag(5) as! UILabel).textColor = UIColor.red
+            
+            let scheme = user?.school!.getTimeScheme(for: (indexPath as NSIndexPath).row)
+            
+            let no = ChangedView(frame: CGRect(x: 0, y: 0, width: cell.viewWithTag(1)!.frame.origin.x*0.6, height: cell.frame.height), top: scheme?.connectedToPrevious ?? false, bottom: scheme?.connectedToNext ?? false)
             no.tag = 111
             no.backgroundColor = UIColor.clear
             cell.addSubview(no)
         }
+        /*cell.layoutIfNeeded()
+        if let constVis = (cell.viewWithTag(5) as! UILabel).superview!.constraints.first(where: { $0.identifier == "ewInfoVis" }) {
+            constVis.isActive = (change?.info) != nil
+        }
+        
+        for con in (cell.viewWithTag(5) as! UILabel).superview!.constraints {
+            print(con.identifier)
+        }*/
+        
+        //let constInVis = (cell.viewWithTag(5) as! UILabel).superview!.constraints.first(where: { $0.identifier == "ewInfoInVis" })!
+        
+        
+        
+        //constInVis.isActive = (change?.info) == nil
         
         return cell
     }
@@ -230,15 +249,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let dbIndexPath = IndexPath(row: (indexPath as NSIndexPath).row+1, section: (indexPath as NSIndexPath).section)
         view.sLesson(timetable.getLessonForIndexPath(dbIndexPath)!)
         
-        view.descriptionLabel.textColor = user?.colorSecondary
-        view.backgroundColor = user?.colorPrimary
-        view.finishButton.setTitleColor(user?.colorSecondary, for: UIControlState())
-        view.editButton.setTitleColor(user?.colorSecondary, for: UIControlState())
+        view.descriptionLabel.textColor = user?.school!.colorSecondary
+        view.backgroundColor = user?.school!.colorPrimary
+        view.finishButton.setTitleColor(user?.school!.colorSecondary, for: UIControlState())
+        view.editButton.setTitleColor(user?.school!.colorSecondary, for: UIControlState())
         
-        view.actualRoom.textColor = user?.colorText
-        view.actualSubject.textColor = user?.colorText
-        view.actualTeacher.textColor = user?.colorText
-        view.infoTextLabel.textColor = user?.colorText
+        view.actualRoom.textColor = user?.school!.colorText
+        view.actualSubject.textColor = user?.school!.colorText
+        view.actualTeacher.textColor = user?.school!.colorText
+        view.infoTextLabel.textColor = user?.school!.colorText
         
         self.view.addSubview(view)
         self.collectionView.isUserInteractionEnabled = false

@@ -21,7 +21,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     @IBOutlet weak var klasse: UITextField!
     
-    var schools: [School] = []
+    var schools: [SchoolSummary] = []
     var user: User?
     let fetcher = SchoolFetcher()
     
@@ -54,7 +54,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             
             self.schools = ret
             self.pickerView.reloadAllComponents()
-            let usersSchoolId = self.user?.schoolid
+            let usersSchoolId = self.user?.school!.id
             
             for (i,s) in self.schools.enumerated() {
                 if (s.id == usersSchoolId){
@@ -70,9 +70,9 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             return
         }
         let selected = schools[pickerView.selectedRow(inComponent: 0)]
-        user?.schoolid = selected.id
-        user?.schoollink = selected.link
-        user?.schoolname = selected.name
+        user?.school!.id = selected.id
+        user?.school!.link = selected.link
+        user?.school!.name = selected.name
         user?.klasse = klasse.text!
         user?.klassenstufe = klassenStufe.text!
         delegate.saveContext()
@@ -99,7 +99,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.navigationItem.hidesBackButton = !textFieldsOkay()
+        /*self.navigationItem.hidesBackButton = !textFieldsOkay()
 
         
         if (Int(textField.text!) != nil && Int(textField.text!) != 0){
@@ -118,7 +118,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
                     })
                 })
             return false
-        }
+        }*/
+        return true
     }
     
     func textFieldsOkay() -> Bool{
