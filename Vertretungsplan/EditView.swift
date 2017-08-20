@@ -11,6 +11,7 @@ import UIKit
 class EditView: UIView, Fadable {
 
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     
     @IBOutlet weak var subjectTextField: UITextField!
     
@@ -33,6 +34,8 @@ class EditView: UIView, Fadable {
     var edit = false
     
     let changedTimetable = ((delegate.window?.rootViewController as! UINavigationController).viewControllers.first as! ViewController).changedTimetable
+    
+    let school = ((delegate.window?.rootViewController as! UINavigationController).viewControllers.first as! ViewController).user?.school
     
     var fadingView: UIView = UIView()
     
@@ -64,6 +67,19 @@ class EditView: UIView, Fadable {
             if(change.room != lesson.room){
                 actualRoom.text = change.room
             }
+        }
+        
+        if let timescheme = school?.getTimeScheme(for: lesson.hour - 1), let startTime = timescheme.startTime, let endTime = timescheme.endTime{
+            timeLabel.isHidden = false
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm"
+            
+            let p1 = formatter.string(from: startTime)
+            let p2 = formatter.string(from: endTime)
+            
+            timeLabel.text = p1 + " – " + p2
+        }else{
+            timeLabel.isHidden = true
         }
     }
     

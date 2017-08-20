@@ -72,20 +72,3 @@ class TimeTableLayout: UICollectionViewLayout{
         return true
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

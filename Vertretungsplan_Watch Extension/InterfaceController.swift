@@ -16,14 +16,13 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     var session : WCSession?
     
     @IBOutlet var timeTable: WKInterfaceTable!
-    @IBOutlet var weekdayLabel: WKInterfaceLabel!
     
     var currentDisplayWeekDay = 0 {
         didSet {
             let displayDate = Calendar.current.date(bySetting: .weekday, value: currentDisplayWeekDay + 2, of: Date())
             let weekdayFormatter = DateFormatter()
             weekdayFormatter.dateFormat = "EEEE"
-            weekdayLabel.setText(weekdayFormatter.string(from: displayDate ?? Date()))
+            self.setTitle(weekdayFormatter.string(from: displayDate ?? Date()))
         }
     }
     
