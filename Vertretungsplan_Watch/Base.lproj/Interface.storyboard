@@ -14,9 +14,6 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Vertretungsplan_Watch_Extension">
                     <items>
-                        <label alignment="left" text="Montag" id="CwA-aT-byI">
-                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
-                        </label>
                         <table alignment="left" id="IdZ-jh-yba">
                             <items>
                                 <tableRow identifier="MainRowType" selectable="NO" id="xfH-CP-RYC" customClass="TimeTableRowController" customModule="Vertretungsplan_Watch_Extension">
@@ -26,7 +23,7 @@
                                             <label width="0.40000000000000002" height="1" alignment="left" text="AAA" textAlignment="center" id="jjQ-g5-U7e"/>
                                             <label width="0.5" height="1" alignment="left" text="S000" textAlignment="center" id="e94-ja-P1k"/>
                                         </items>
-                                        <color key="backgroundColor" red="0.187137350795756" green="0.04682868111304099" blue="0.11945995992006306" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.3258662135278515" green="0.033333170287310331" blue="0.19738009621093222" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </group>
                                     <connections>
                                         <outlet property="hourLabel" destination="dch-Sr-FLy" id="P80-gP-WfP"/>
@@ -60,7 +57,6 @@
                     </menu>
                     <connections>
                         <outlet property="timeTable" destination="IdZ-jh-yba" id="pLJ-Bk-dYA"/>
-                        <outlet property="weekdayLabel" destination="CwA-aT-byI" id="mk3-Ph-lbN"/>
                     </connections>
                 </controller>
             </objects>

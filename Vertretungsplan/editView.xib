@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -97,6 +97,12 @@
                         <action selector="focus" destination="GcU-d8-onL" eventType="editingDidBegin" id="2Ha-tz-zru"/>
                     </connections>
                 </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00-00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39e-pu-3Er">
+                    <rect key="frame" x="112" y="19" width="68" height="13.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <color key="textColor" red="0.99607843137254903" green="0.84705882352941175" blue="0.38039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.51372549020000002" green="0.078431372550000003" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -110,6 +116,7 @@
                 <constraint firstItem="3NM-9i-MjU" firstAttribute="leading" secondItem="muw-wj-XIM" secondAttribute="trailing" constant="20" id="Eef-2b-xgM"/>
                 <constraint firstAttribute="bottom" secondItem="70t-7c-clK" secondAttribute="bottom" constant="20" id="Jlh-U7-TS7"/>
                 <constraint firstAttribute="bottom" secondItem="7SO-wO-LQx" secondAttribute="bottom" constant="13" id="KEf-iz-CWj"/>
+                <constraint firstItem="39e-pu-3Er" firstAttribute="baseline" secondItem="9fq-OH-KRt" secondAttribute="baseline" id="L4u-Ru-sha"/>
                 <constraint firstItem="5SE-C3-0hE" firstAttribute="top" secondItem="GcU-d8-onL" secondAttribute="top" constant="10" id="L5g-7Y-fcV"/>
                 <constraint firstItem="gqV-WQ-uF1" firstAttribute="leading" secondItem="GcU-d8-onL" secondAttribute="leading" constant="20" id="M7v-uH-0ol"/>
                 <constraint firstItem="1PL-Mm-z8A" firstAttribute="width" secondItem="WV8-ah-C2H" secondAttribute="width" id="MON-DS-EIy"/>
@@ -126,6 +133,7 @@
                 <constraint firstAttribute="bottom" secondItem="muw-wj-XIM" secondAttribute="bottom" constant="20" id="eTG-bt-CNJ"/>
                 <constraint firstItem="70t-7c-clK" firstAttribute="top" secondItem="gqV-WQ-uF1" secondAttribute="bottom" constant="8" id="mkd-r7-Kh8"/>
                 <constraint firstItem="0Ds-iT-LiG" firstAttribute="leading" secondItem="GcU-d8-onL" secondAttribute="leading" constant="20" id="mul-nk-ApC"/>
+                <constraint firstItem="39e-pu-3Er" firstAttribute="leading" secondItem="9fq-OH-KRt" secondAttribute="trailing" constant="15" id="nJz-AN-DGB"/>
                 <constraint firstItem="9fq-OH-KRt" firstAttribute="leading" secondItem="GcU-d8-onL" secondAttribute="leading" constant="5" id="oBR-MH-GlK"/>
                 <constraint firstAttribute="trailing" secondItem="0Ds-iT-LiG" secondAttribute="trailing" constant="20" id="om0-7f-JYw"/>
                 <constraint firstAttribute="trailing" secondItem="5SE-C3-0hE" secondAttribute="trailing" constant="10" id="qLA-VI-JKd"/>
@@ -164,6 +172,7 @@
                 <outlet property="roomTextField" destination="3NM-9i-MjU" id="CqL-dq-HtR"/>
                 <outlet property="subjectTextField" destination="70t-7c-clK" id="RuN-H0-nTk"/>
                 <outlet property="teacherTextField" destination="muw-wj-XIM" id="6er-mH-g0O"/>
+                <outlet property="timeLabel" destination="39e-pu-3Er" id="RcU-bz-UyF"/>
             </connections>
             <point key="canvasLocation" x="664" y="-303"/>
         </view>

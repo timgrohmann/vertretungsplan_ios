@@ -13,6 +13,8 @@
 		1811B9071D8D4EE900939BCC /* Fadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811B9061D8D4EE900939BCC /* Fadable.swift */; };
 		181443951D803C3500991597 /* global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181443941D803C3500991597 /* global.swift */; };
 		1814439A1D80478600991597 /* changedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181443991D80478600991597 /* changedView.swift */; };
+		181DCA0A1F48D21200F27D8B /* WatchDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181DCA091F48D21200F27D8B /* WatchDay.swift */; };
+		181DCA0C1F48D24500F27D8B /* WatchLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181DCA0B1F48D24500F27D8B /* WatchLesson.swift */; };
 		182446591D6090EA004D5207 /* TimeTableLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182446581D6090EA004D5207 /* TimeTableLayout.swift */; };
 		1824465B1D609D6F004D5207 /* header.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1824465A1D609D6F004D5207 /* header.xib */; };
 		1824465D1D60B35F004D5207 /* Timetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824465C1D60B35F004D5207 /* Timetable.swift */; };
@@ -48,7 +50,7 @@
 		18D333401F45F94A00869F06 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D3333F1F45F94A00869F06 /* ComplicationController.swift */; };
 		18D333421F45F94A00869F06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D333411F45F94A00869F06 /* Assets.xcassets */; };
 		18D333461F45F94A00869F06 /* Vertretungsplan_Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 18D333261F45F94A00869F06 /* Vertretungsplan_Watch.app */; };
-		18D333501F46020A00869F06 /* Watch_Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D3334F1F46020A00869F06 /* Watch_Lesson.swift */; };
+		18D333501F46020A00869F06 /* WatchVPData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D3334F1F46020A00869F06 /* WatchVPData.swift */; };
 		18D333521F46052A00869F06 /* WatchDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D333511F46052A00869F06 /* WatchDataExtension.swift */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +110,8 @@
 		1811B9061D8D4EE900939BCC /* Fadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fadable.swift; sourceTree = "<group>"; };
 		181443941D803C3500991597 /* global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = global.swift; sourceTree = "<group>"; };
 		181443991D80478600991597 /* changedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = changedView.swift; sourceTree = "<group>"; };
+		181DCA091F48D21200F27D8B /* WatchDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchDay.swift; sourceTree = "<group>"; };
+		181DCA0B1F48D24500F27D8B /* WatchLesson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchLesson.swift; sourceTree = "<group>"; };
 		182446581D6090EA004D5207 /* TimeTableLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableLayout.swift; sourceTree = "<group>"; };
 		1824465A1D609D6F004D5207 /* header.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = header.xib; sourceTree = "<group>"; };
 		1824465C1D60B35F004D5207 /* Timetable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timetable.swift; sourceTree = "<group>"; };
@@ -151,7 +155,7 @@
 		18D3333F1F45F94A00869F06 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		18D333411F45F94A00869F06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18D333431F45F94A00869F06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		18D3334F1F46020A00869F06 /* Watch_Lesson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Watch_Lesson.swift; sourceTree = "<group>"; };
+		18D3334F1F46020A00869F06 /* WatchVPData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchVPData.swift; sourceTree = "<group>"; };
 		18D333511F46052A00869F06 /* WatchDataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchDataExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -179,6 +183,25 @@
 				181443991D80478600991597 /* changedView.swift */,
 			);
 			name = ChangedView;
+			sourceTree = "<group>";
+		};
+		181DCA0D1F48D27700F27D8B /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				181DCA0B1F48D24500F27D8B /* WatchLesson.swift */,
+				181DCA091F48D21200F27D8B /* WatchDay.swift */,
+				18D3334F1F46020A00869F06 /* WatchVPData.swift */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		181DCA0E1F48D29000F27D8B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				18D333391F45F94A00869F06 /* InterfaceController.swift */,
+				186CF5A61F4854470074C8B3 /* TimeTableRowController.swift */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		182446531D607274004D5207 /* Data */ = {
@@ -293,15 +316,14 @@
 		18D333361F45F94A00869F06 /* Vertretungsplan_Watch Extension */ = {
 			isa = PBXGroup;
 			children = (
-				18D333391F45F94A00869F06 /* InterfaceController.swift */,
+				181DCA0E1F48D29000F27D8B /* ViewControllers */,
+				181DCA0D1F48D27700F27D8B /* Classes */,
 				18D3333B1F45F94A00869F06 /* ExtensionDelegate.swift */,
 				18D3333D1F45F94A00869F06 /* NotificationController.swift */,
 				18D3333F1F45F94A00869F06 /* ComplicationController.swift */,
 				18D333411F45F94A00869F06 /* Assets.xcassets */,
 				18D333431F45F94A00869F06 /* Info.plist */,
 				18D333371F45F94A00869F06 /* Supporting Files */,
-				18D3334F1F46020A00869F06 /* Watch_Lesson.swift */,
-				186CF5A61F4854470074C8B3 /* TimeTableRowController.swift */,
 			);
 			path = "Vertretungsplan_Watch Extension";
 			sourceTree = "<group>";
@@ -489,12 +511,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				181DCA0A1F48D21200F27D8B /* WatchDay.swift in Sources */,
 				180083981F4725A0005EF005 /* InterfaceController.swift in Sources */,
 				18D3333E1F45F94A00869F06 /* NotificationController.swift in Sources */,
 				18D333401F45F94A00869F06 /* ComplicationController.swift in Sources */,
 				18D3333C1F45F94A00869F06 /* ExtensionDelegate.swift in Sources */,
 				186CF5A71F4854470074C8B3 /* TimeTableRowController.swift in Sources */,
-				18D333501F46020A00869F06 /* Watch_Lesson.swift in Sources */,
+				18D333501F46020A00869F06 /* WatchVPData.swift in Sources */,
+				181DCA0C1F48D24500F27D8B /* WatchLesson.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
