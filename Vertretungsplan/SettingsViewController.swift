@@ -21,6 +21,9 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     @IBOutlet weak var klasse: UITextField!
     
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
     var schools: [SchoolSummary] = []
     var user: User?
     let fetcher = SchoolFetcher()
@@ -36,6 +39,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         klasse.text = user?.klasse
         klassenStufe.text = user?.klassenstufe
+        usernameTextField.text = user?.username
+        passwordTextField.text = user?.password
         
         fetcher.fetch(){
             ret, notification in
@@ -75,6 +80,10 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         user?.school!.name = selected.name
         user?.klasse = klasse.text!
         user?.klassenstufe = klassenStufe.text!
+        user?.username = usernameTextField.text ?? ""
+        user?.password = passwordTextField.text ?? ""
+        
+        user?.school?.loadProperties(){_ in}
         delegate.saveContext()
     }
     

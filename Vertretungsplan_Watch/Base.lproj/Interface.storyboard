@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="13196" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
     <device id="watch38" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="12029"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="13051"/>
     </dependencies>
     <scenes>
         <!--Interface Controller-->
@@ -26,6 +26,7 @@
                                         <color key="backgroundColor" red="0.3258662135278515" green="0.033333170287310331" blue="0.19738009621093222" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </group>
                                     <connections>
+                                        <outlet property="group" destination="Bnj-iM-fzd" id="10O-xh-bVp"/>
                                         <outlet property="hourLabel" destination="dch-Sr-FLy" id="P80-gP-WfP"/>
                                         <outlet property="roomLabel" destination="e94-ja-P1k" id="fc5-M9-Jre"/>
                                         <outlet property="subjectLabel" destination="jjQ-g5-U7e" id="z1Y-Ww-BYA"/>

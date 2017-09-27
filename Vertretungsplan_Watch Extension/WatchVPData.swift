@@ -43,6 +43,7 @@ class WatchVPData {
             }
         }
         if let c = CLKComplicationServer.sharedInstance().activeComplications?[0]{
+            print(c, "will be prompted to reload")
             CLKComplicationServer.sharedInstance().reloadTimeline(for: c)
         }
     }

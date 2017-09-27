@@ -22,6 +22,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             let displayDate = Calendar.current.date(bySetting: .weekday, value: currentDisplayWeekDay + 2, of: Date())
             let weekdayFormatter = DateFormatter()
             weekdayFormatter.dateFormat = "EEEE"
+            weekdayFormatter.locale = Locale(identifier: "DE")
             self.setTitle(weekdayFormatter.string(from: displayDate ?? Date()))
         }
     }
@@ -37,7 +38,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         print(":awake")
         // Configure interface objects here.
         
-        session = WCSession.default()
+        session = WCSession.default
         session?.delegate = self
         session?.activate()
         
@@ -104,6 +105,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             replyData in
             if let rawReply = replyData["data"] as? [String:Any] {
                 DispatchQueue.main.async {
+                    print("recieved new data message")
                     (WKExtension.shared().delegate as! ExtensionDelegate).currentData.refreshData(userInfo: rawReply)
                     self.loadTable(today: true)
                 }

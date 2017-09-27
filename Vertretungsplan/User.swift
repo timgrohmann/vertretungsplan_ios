@@ -12,6 +12,8 @@ import CoreData
 class User: NSManagedObject{
     @NSManaged var klassenstufe: String
     @NSManaged var klasse: String
+    @NSManaged var username: String
+    @NSManaged var password: String
     
     @NSManaged var school: School?
     

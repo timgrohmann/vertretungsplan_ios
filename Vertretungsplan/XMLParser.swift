@@ -13,7 +13,7 @@ class XMLParser: NSObject, XMLParserDelegate{
     var parser: Foundation.XMLParser?
     var url: String
     var parsed: NSDictionary = NSDictionary()
-    var callback: (XMLTimeTableData)->()
+    var callback: (ChangedTimeTableData)->()
     
     var lessons: [ChangedLesson] = []
     
@@ -161,18 +161,18 @@ class XMLParser: NSObject, XMLParserDelegate{
     }
     
     func parserDidEndDocument(_ parser: Foundation.XMLParser) {
-        let data = XMLTimeTableData(changedLessons: lessons, schoolName: schoolName, lastRefreshed: lastRefreshed)
+        let data = ChangedTimeTableData(changedLessons: lessons, schoolName: schoolName, lastRefreshed: lastRefreshed)
         self.callback(data)
         
     }
     
     func parser(_ parser: Foundation.XMLParser, parseErrorOccurred parseError: Error) {
-        callback(XMLTimeTableData(changedLessons: [], schoolName: "", lastRefreshed: "Vertretungsplan hat falsches Dateiformat. Bitte melde dich bei deiner Schule."))
+        callback(ChangedTimeTableData(changedLessons: [], schoolName: "", lastRefreshed: "Vertretungsplan hat falsches Dateiformat. Bitte melde dich bei deiner Schule."))
         //reset callback to stop recalling it with parserDidEndDocument:
         self.callback = {_ in}
     }
     
-    init(url: String, callback: @escaping (XMLTimeTableData)->()) {
+    init(url: String, callback: @escaping (ChangedTimeTableData)->()) {
         
         self.url = url
         self.callback = callback
@@ -184,7 +184,7 @@ class XMLParser: NSObject, XMLParserDelegate{
             let task = session.dataTask(with: nsurl, completionHandler: {
                 data, response, error in
                 if let error = error{
-                    callback(XMLTimeTableData(changedLessons: [], schoolName: "", lastRefreshed: "Vertretungsplan konnte nicht geladen werden. "+error.localizedDescription))
+                    callback(ChangedTimeTableData(changedLessons: [], schoolName: "", lastRefreshed: "Vertretungsplan konnte nicht geladen werden. "+error.localizedDescription))
                 }
                 
                 if let r = response as? HTTPURLResponse{
@@ -193,10 +193,10 @@ class XMLParser: NSObject, XMLParserDelegate{
                     case 200:
                         break
                     case 404:
-                        callback(XMLTimeTableData(changedLessons: [], schoolName: "", lastRefreshed: "Vertretungsplan konnte nicht geladen werden. Der Vertretungsplan konnte nicht auf dem Server deiner Schule gefunden werden."))
+                        callback(ChangedTimeTableData(changedLessons: [], schoolName: "", lastRefreshed: "Vertretungsplan konnte nicht geladen werden. Der Vertretungsplan konnte nicht auf dem Server deiner Schule gefunden werden."))
                         break
                     default:
-                        callback(XMLTimeTableData(changedLessons: [], schoolName: "", lastRefreshed: "Vertretungsplan konnte nicht geladen werden. Unbekannter Fehler"))
+                        callback(ChangedTimeTableData(changedLessons: [], schoolName: "", lastRefreshed: "Vertretungsplan konnte nicht geladen werden. Unbekannter Fehler"))
                         break
                     }
                 }
@@ -210,7 +210,7 @@ class XMLParser: NSObject, XMLParserDelegate{
             })
             task.resume()
         }else{
-            callback(XMLTimeTableData(changedLessons: [], schoolName: "", lastRefreshed: "'"+url+"' ist kein gültiger Link"))
+            callback(ChangedTimeTableData(changedLessons: [], schoolName: "", lastRefreshed: "'"+url+"' ist kein gültiger Link"))
         }
     }
 }

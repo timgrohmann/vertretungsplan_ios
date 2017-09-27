@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct XMLTimeTableData{
+struct ChangedTimeTableData{
     let changedLessons: [ChangedLesson]
     let schoolName: String
     let lastRefreshed: String

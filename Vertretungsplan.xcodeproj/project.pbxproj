@@ -20,7 +20,7 @@
 		1824465D1D60B35F004D5207 /* Timetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824465C1D60B35F004D5207 /* Timetable.swift */; };
 		182446681D60CD96004D5207 /* editView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182446671D60CD96004D5207 /* editView.xib */; };
 		1824466A1D60D126004D5207 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182446691D60D126004D5207 /* EditView.swift */; };
-		18318D951D7C43AA00072640 /* XMLTimeTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18318D941D7C43AA00072640 /* XMLTimeTableData.swift */; };
+		18318D951D7C43AA00072640 /* ChangedTimeTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18318D941D7C43AA00072640 /* ChangedTimeTableData.swift */; };
 		18318DA41D7C570A00072640 /* SchoolFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18318DA31D7C570A00072640 /* SchoolFetcher.swift */; };
 		18318DA61D7C62C500072640 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18318DA51D7C62C500072640 /* SettingsViewController.swift */; };
 		18318DA81D7C693D00072640 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18318DA71D7C693D00072640 /* User.swift */; };
@@ -29,6 +29,7 @@
 		184E33411EAE7A2F0013F915 /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E33401EAE7A2F0013F915 /* JSONLoader.swift */; };
 		185A82B51D0C43BF00B24810 /* Klasse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185A82B41D0C43BF00B24810 /* Klasse.swift */; };
 		186CF5A71F4854470074C8B3 /* TimeTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186CF5A61F4854470074C8B3 /* TimeTableRowController.swift */; };
+		188D96B01F7C05EF00A1AECB /* LoaderWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188D96AF1F7C05EF00A1AECB /* LoaderWrapper.swift */; };
 		189030F81D904CE8002F9283 /* TimeScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189030F71D904CE8002F9283 /* TimeScheme.swift */; };
 		189471EF1D884C0D00BB16E1 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189471EE1D884C0D00BB16E1 /* Day.swift */; };
 		189AB6B81D0C1C0E002C3526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189AB6B71D0C1C0E002C3526 /* AppDelegate.swift */; };
@@ -117,7 +118,7 @@
 		1824465C1D60B35F004D5207 /* Timetable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timetable.swift; sourceTree = "<group>"; };
 		182446671D60CD96004D5207 /* editView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = editView.xib; sourceTree = "<group>"; };
 		182446691D60D126004D5207 /* EditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
-		18318D941D7C43AA00072640 /* XMLTimeTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLTimeTableData.swift; sourceTree = "<group>"; };
+		18318D941D7C43AA00072640 /* ChangedTimeTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangedTimeTableData.swift; sourceTree = "<group>"; };
 		18318D9A1D7C4AC700072640 /* Vertretungsplan1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vertretungsplan1.1.xcdatamodel; sourceTree = "<group>"; };
 		18318DA31D7C570A00072640 /* SchoolFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolFetcher.swift; sourceTree = "<group>"; };
 		18318DA51D7C62C500072640 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +128,7 @@
 		184E33401EAE7A2F0013F915 /* JSONLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONLoader.swift; path = ../JSONLoader.swift; sourceTree = "<group>"; };
 		185A82B41D0C43BF00B24810 /* Klasse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Klasse.swift; sourceTree = "<group>"; };
 		186CF5A61F4854470074C8B3 /* TimeTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableRowController.swift; sourceTree = "<group>"; };
+		188D96AF1F7C05EF00A1AECB /* LoaderWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderWrapper.swift; sourceTree = "<group>"; };
 		189030F71D904CE8002F9283 /* TimeScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeScheme.swift; sourceTree = "<group>"; };
 		189471EE1D884C0D00BB16E1 /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		189AB6B41D0C1C0E002C3526 /* Vertretungsplan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vertretungsplan.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -269,11 +271,12 @@
 				1824465C1D60B35F004D5207 /* Timetable.swift */,
 				189471EE1D884C0D00BB16E1 /* Day.swift */,
 				184E33401EAE7A2F0013F915 /* JSONLoader.swift */,
+				188D96AF1F7C05EF00A1AECB /* LoaderWrapper.swift */,
 				189AB6CC1D0C1C65002C3526 /* XMLParser.swift */,
 				18327D5D1D621797004823AE /* ChangedTimetable.swift */,
 				18327D5F1D62191B004823AE /* ChangedLesson.swift */,
 				185A82B41D0C43BF00B24810 /* Klasse.swift */,
-				18318D941D7C43AA00072640 /* XMLTimeTableData.swift */,
+				18318D941D7C43AA00072640 /* ChangedTimeTableData.swift */,
 				18CDC6E11D636D49001821D9 /* School.swift */,
 				18318DA31D7C570A00072640 /* SchoolFetcher.swift */,
 				18318DA51D7C62C500072640 /* SettingsViewController.swift */,
@@ -400,22 +403,24 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Tim Grohmann";
 				TargetAttributes = {
 					189AB6B31D0C1C0E002C3526 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 3Z5JRGBTJE;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 					18D333251F45F94A00869F06 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 3Z5JRGBTJE;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					18D333311F45F94A00869F06 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 3Z5JRGBTJE;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -482,13 +487,14 @@
 				181443951D803C3500991597 /* global.swift in Sources */,
 				18D333521F46052A00869F06 /* WatchDataExtension.swift in Sources */,
 				189AB6CF1D0C2E9C002C3526 /* Lesson.swift in Sources */,
-				18318D951D7C43AA00072640 /* XMLTimeTableData.swift in Sources */,
+				18318D951D7C43AA00072640 /* ChangedTimeTableData.swift in Sources */,
 				1824465D1D60B35F004D5207 /* Timetable.swift in Sources */,
 				18318DA61D7C62C500072640 /* SettingsViewController.swift in Sources */,
 				18327D5E1D621797004823AE /* ChangedTimetable.swift in Sources */,
 				18327D601D62191B004823AE /* ChangedLesson.swift in Sources */,
 				1811B9071D8D4EE900939BCC /* Fadable.swift in Sources */,
 				189030F81D904CE8002F9283 /* TimeScheme.swift in Sources */,
+				188D96B01F7C05EF00A1AECB /* LoaderWrapper.swift in Sources */,
 				18318DA41D7C570A00072640 /* SchoolFetcher.swift in Sources */,
 				189AB6CD1D0C1C65002C3526 /* XMLParser.swift in Sources */,
 				189471EF1D884C0D00BB16E1 /* Day.swift in Sources */,
@@ -574,14 +580,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -621,14 +633,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -663,7 +681,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Tim-Grohmann.Vertretungsplan";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -677,7 +696,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Tim-Grohmann.Vertretungsplan";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -696,7 +716,8 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 3.2;
 			};
@@ -716,7 +737,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 3.2;
 			};
@@ -736,7 +758,8 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 3.2;
 			};
@@ -755,7 +778,8 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 3.2;
 			};
