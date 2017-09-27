@@ -13,7 +13,9 @@ import CoreData
 class ChangedLesson: Equatable{
     
     var subject: String = ""
+    var origSubject: String?
     var teacher: String = ""
+    var origTeacher: String?
     var room: String = ""
     var course: String = ""
     var info: String = ""
@@ -41,6 +43,11 @@ class ChangedLesson: Equatable{
         
         if (course.lowercased() ==  lesson.course.lowercased()){
             return true
+        }
+        
+        if let oTeacher = self.origTeacher, let oSubject = self.origSubject {
+            //print("asserting:",oTeacher.lowercased(),"==",lesson.teacher.lowercased())
+            return (oTeacher.lowercased() == lesson.teacher.lowercased()) && (oSubject.lowercased() == lesson.subject.lowercased())
         }
         
         /*if klasse?.klassen.count == 1 && klasse?.klassen[0] == myKlasse{

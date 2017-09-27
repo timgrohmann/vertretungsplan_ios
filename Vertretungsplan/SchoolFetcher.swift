@@ -12,7 +12,7 @@ import CoreData
 
 class SchoolFetcher{
     var schools: [SchoolSummary] = []
-    var url = "https://146programming.de/vp/schools.json"
+    var url = "https://vpman.146programming.de/schools-app/schools"
     
     func fetch(_ completion:@escaping (_ successful: [SchoolSummary], _ notification: String?)->()){
         let session = URLSession(configuration: URLSessionConfiguration.default)

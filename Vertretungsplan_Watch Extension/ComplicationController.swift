@@ -39,11 +39,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         
         let date = Date()
         
-        /* Use this for testing a specific date
+        /* Use this for testing a specific date and time
          
         let intFormatter = DateFormatter()
         intFormatter.dateFormat = "dd.MM.yyyy HH:mm"
-        let date = intFormatter.date(from: "21.08.2017 7:00")!*/
+        let date = intFormatter.date(from: "21.08.2017 9:30")!*/
         
         let weekday = Calendar.current.component(.weekday, from: date)
         
@@ -91,8 +91,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         
         var entries: [CLKComplicationTimelineEntry] = []
         
-        let date = Date()
-        let weekday = Calendar.current.component(.weekday, from: date)
+        //let date = Date()
+        let weekday = Calendar.current.component(.weekday, from: date) - 2
         
         
         let formatter = DateFormatter()
@@ -102,9 +102,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         let timeDate = formatter.date(from: str)!
         
         
-        let weekDayData = data.days[weekday - 2]
+        let weekDayData = data.days[weekday]
         //let weekDayData = data.days[0]
-        
         
         let lessonsToday = weekDayData?.lessons ?? []
         for lesson in lessonsToday {
@@ -126,16 +125,12 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             
             entries.append(entry)
             
-            if let timeNext = data.getTimeForLesson(with: lesson.hour + 1)?.start, let timeEnd = time?.end {
+            if let timeEnd = data.getTimeForLesson(with: lesson.hour - 1)?.end, let timeNext = time?.start {
                 let timeInbetween = DateInterval(start: timeEnd, end: timeNext)
                 if timeInbetween.duration > 60 {
-                    let emptyTemplate = CLKComplicationTemplateModularSmallStackText()
-                    emptyTemplate.line1TextProvider = CLKSimpleTextProvider(text: "---")
-                    emptyTemplate.line2TextProvider = CLKSimpleTextProvider(text: "---")
-                    
-                    
                     if let emptyStartDate = Calendar.current.date(bySettingHour: Calendar.current.component(.hour, from: timeEnd), minute: Calendar.current.component(.minute, from: timeEnd), second: 0, of: Date()){
-                        let entry = CLKComplicationTimelineEntry(date: emptyStartDate, complicationTemplate: emptyTemplate)
+                        
+                        let entry = CLKComplicationTimelineEntry(date: emptyStartDate, complicationTemplate: modularTemplate)
                         entries.append(entry)
                     }
                 }
@@ -145,7 +140,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         
         if let lastLesson = lessonsToday.last {
             let lastTimeInterval = data.getTimeForLesson(with: lastLesson.hour)
-            if let endOfDay = lastTimeInterval?.end {
+            if let endOfDay = lastTimeInterval?.end, endOfDay < timeDate {
                 let modularTemplate = CLKComplicationTemplateModularSmallStackText()
                 modularTemplate.line1TextProvider = CLKSimpleTextProvider(text: "---")
                 modularTemplate.line2TextProvider = CLKSimpleTextProvider(text: "---")
@@ -168,8 +163,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     func getTimelineEntries(for complication: CLKComplication, after date: Date, limit: Int, withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
         var entries: [CLKComplicationTimelineEntry] = []
         
-        let date = Date()
-        let weekday = Calendar.current.component(.weekday, from: date)
+        //let date = Date()
+        let weekday = Calendar.current.component(.weekday, from: date) - 2
         
         
         let formatter = DateFormatter()
@@ -179,8 +174,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         let timeDate = formatter.date(from: str)!
         
         
-        let weekDayData = data.days[weekday - 2]
-        //let weekDayData = data.days[0]
+        let weekDayData = data.days[weekday]
         
         let lessonsToday = weekDayData?.lessons ?? []
         for lesson in lessonsToday {
@@ -197,25 +191,18 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             
             let startDate = Calendar.current.date(bySettingHour: startHour, minute: startMinute, second: 0, of: Date())
             
-            let modularTemplate = CLKComplicationTemplateModularSmallStackText()
-            
-            print(lesson,"added to Time Travel")
-            
-            modularTemplate.line1TextProvider = CLKSimpleTextProvider(text: lesson.subject_short.uppercased())
-            modularTemplate.line2TextProvider = CLKSimpleTextProvider(text: lesson.room.uppercased())
+            let modularTemplate = lesson.timeLineTemplate
             let entry = CLKComplicationTimelineEntry(date: startDate!, complicationTemplate: modularTemplate)
             entries.append(entry)
+            print(lesson,"added to Time Travel")
+
             
-            if let timeNext = data.getTimeForLesson(with: lesson.hour + 1)?.start, let timeEnd = time?.end {
+            if let timeEnd = data.getTimeForLesson(with: lesson.hour - 1)?.end, let timeNext = time?.start {
                 let timeInbetween = DateInterval(start: timeEnd, end: timeNext)
                 if timeInbetween.duration > 60 {
-                    let emptyTemplate = CLKComplicationTemplateModularSmallStackText()
-                    emptyTemplate.line1TextProvider = CLKSimpleTextProvider(text: "---")
-                    emptyTemplate.line2TextProvider = CLKSimpleTextProvider(text: "---")
-                    
-                    
                     if let emptyStartDate = Calendar.current.date(bySettingHour: Calendar.current.component(.hour, from: timeEnd), minute: Calendar.current.component(.minute, from: timeEnd), second: 0, of: Date()){
-                        let entry = CLKComplicationTimelineEntry(date: emptyStartDate, complicationTemplate: emptyTemplate)
+                        
+                        let entry = CLKComplicationTimelineEntry(date: emptyStartDate, complicationTemplate: modularTemplate)
                         entries.append(entry)
                     }
                 }
@@ -225,12 +212,18 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         
         if let lastLesson = lessonsToday.last {
             let lastTimeInterval = data.getTimeForLesson(with: lastLesson.hour)
-            if let endOfDay = lastTimeInterval?.end {
+            if let endOfDay = lastTimeInterval?.end, endOfDay > timeDate {
                 let modularTemplate = CLKComplicationTemplateModularSmallStackText()
                 modularTemplate.line1TextProvider = CLKSimpleTextProvider(text: "---")
                 modularTemplate.line2TextProvider = CLKSimpleTextProvider(text: "---")
-                let entry = CLKComplicationTimelineEntry(date: endOfDay, complicationTemplate: modularTemplate)
-                entries.append(entry)
+                
+                
+                let endStartMinute = Calendar.current.component(.minute, from: endOfDay)
+                let endStartHour = Calendar.current.component(.hour, from: endOfDay)
+                if let endStartDate = Calendar.current.date(bySettingHour: endStartHour, minute: endStartMinute, second: 0, of: Date()){
+                    let entry = CLKComplicationTimelineEntry(date: endStartDate, complicationTemplate: modularTemplate)
+                    entries.append(entry)
+                }
             }
         }
         

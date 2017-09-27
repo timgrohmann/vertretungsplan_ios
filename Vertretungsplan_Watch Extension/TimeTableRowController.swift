@@ -13,9 +13,17 @@ class TimeTableRowController: NSObject {
     @IBOutlet var subjectLabel: WKInterfaceLabel!
     @IBOutlet var roomLabel: WKInterfaceLabel!
     
+    @IBOutlet var group: WKInterfaceGroup!
+    
+    
     func setLesson(to lesson: WatchLesson){
         hourLabel.setText(String(lesson.hour))
         subjectLabel.setText(lesson.subject_short)
         roomLabel.setText(lesson.room.uppercased())
+        
+        if lesson.changed {
+            let color = UIColor.init(red: 231/255, green: 76/255, blue: 60/255, alpha: 1)
+            group.setBackgroundColor(color)
+        }
     }
 }

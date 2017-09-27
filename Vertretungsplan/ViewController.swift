@@ -23,6 +23,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var c = "CCCCCC"
     var user: User?
     
+    var sentInitialData = false
+    
     var wde: WatchDataExtension {
         return delegate.watchDataExtension
     }
@@ -36,8 +38,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionView.reloadData()
         
         scrollToCurrentDay()
-        
-        print("viewDidLoad:")
         
         let userFetch: NSFetchRequest<User> = NSFetchRequest(entityName: "User")
         
@@ -68,11 +68,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let color = UIColor.colorFromHex(c)
         self.navigationController?.navigationBar.barTintColor = color
         
-        reloadAll()
+        //reloadAll()
         loadImage()
-        
-        
-        wde.sendWatchData(timetable: timetable, timescheme: Array(user?.school?.timeschemes ?? []))
     }
 
     override func didReceiveMemoryWarning() {
@@ -90,25 +87,28 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let task = URLSession(configuration: .default).dataTask(with: URLRequest(url: URL(string: url)!), completionHandler: {
             data,error,_ in
             
-            if let imageData = data{
-                let image = UIImage(data: imageData)
-                self.imageView = UIImageView(frame: self.view.frame)
-                
-                let effect = UIBlurEffect(style: .light)
-                let effectView = UIVisualEffectView(effect: effect)
-                effectView.frame = self.view.frame
-                
-                self.imageView?.image = image
-                
-                self.imageView?.contentMode = .scaleAspectFill
-                
-                DispatchQueue.main.async{
-                    self.view.addSubview(effectView)
-                    self.view.sendSubview(toBack: effectView)
-                    self.view.insertSubview(self.imageView!, belowSubview: effectView)
-                    self.scrollViewDidScroll(self.collectionView)
+            DispatchQueue.main.async {
+                if let imageData = data{
+                    let image = UIImage(data: imageData)
+                    self.imageView = UIImageView(frame: self.view.frame)
+                    
+                    let effect = UIBlurEffect(style: .light)
+                    let effectView = UIVisualEffectView(effect: effect)
+                    effectView.frame = self.view.frame
+                    
+                    self.imageView?.image = image
+                    
+                    self.imageView?.contentMode = .scaleAspectFill
+                    
+                    DispatchQueue.main.async{
+                        self.view.addSubview(effectView)
+                        self.view.sendSubview(toBack: effectView)
+                        self.view.insertSubview(self.imageView!, belowSubview: effectView)
+                        self.scrollViewDidScroll(self.collectionView)
+                    }
                 }
             }
+
         })
         task.resume()
     }
@@ -126,14 +126,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     self.lastChangedLabel.text = n
                     return
                 }
-                
-                print("loaded school properties")
-            
+                            
                 self.changedTimetable.load(){
-                    print("loaded")
                     DispatchQueue.main.async{
                         self.collectionView.reloadData()
                         self.lastChangedLabel.text = self.changedTimetable.data?.lastRefreshed
+                        if (!self.sentInitialData){
+                            self.wde.sendWatchData()
+                            self.sentInitialData = true
+                        }
                     }
                 }
             }
@@ -144,7 +145,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         UIView.animate(withDuration: 0.5, animations: {
             self.navigationController?.navigationBar.barTintColor = self.user?.school!.colorPrimary
             self.navigationController?.navigationBar.tintColor = self.user?.school!.colorText
-            self.navigationController?.navigationBar.titleTextAttributes?[NSForegroundColorAttributeName] = self.user?.school!.colorText
+            self.navigationController?.navigationBar.titleTextAttributes?[NSAttributedStringKey.foregroundColor] = self.user?.school!.colorText
             self.view.backgroundColor = self.user?.school!.colorSecondary
             self.lastChangedLabel.textColor = self.user?.school!.colorTextSecondary
             self.lastChangedWrapperView.backgroundColor = self.user?.school!.colorSecondary
@@ -278,7 +279,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let components = (cal as NSCalendar).components([.weekday,.hour], from: Date())
         var w = components.weekday!
         let hour = components.hour!
-        print("Weekday:")
         
         if (2 <= w && w <= 5){
             w -= 2
@@ -291,8 +291,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }else{
             w = 0
         }
-        print(w)
-        
         
         self.collectionView.scrollToItem(at: IndexPath(row: 1, section: w), at: .centeredHorizontally, animated: true)
     }

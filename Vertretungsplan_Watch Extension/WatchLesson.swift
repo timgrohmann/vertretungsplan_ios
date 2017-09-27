@@ -13,6 +13,7 @@ class WatchLesson{
     var hour: Int
     var subject_short: String
     var room: String
+    var changed: Bool = false
     
     init(hour: Int, subject_short: String, room: String) {
         self.hour = hour
@@ -24,6 +25,7 @@ class WatchLesson{
         hour = number
         self.subject_short = rawData["subj"] as? String ?? "ERR"
         self.room = rawData["room"] as? String ?? "ERR"
+        self.changed = rawData["change"] as? Bool ?? false
     }
     
     var timeLineTemplate: CLKComplicationTemplate {

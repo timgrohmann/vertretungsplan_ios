@@ -11,10 +11,10 @@ import UIKit
 import CoreData
 
 class ChangedTimetable{
-    var parser: JSONLoader?
+    var parser: LoaderWrapper?
     //var changedLessons: [ChangedLesson] = []
     var applyingLessons: [ChangedLesson] = []
-    var data: XMLTimeTableData?
+    var data: ChangedTimeTableData?
     var loaded = false
     var user: User?{
         do{
@@ -32,7 +32,8 @@ class ChangedTimetable{
             return
         }
         
-        parser = JSONLoader(url: user.school!.timetablelink){
+        parser = LoaderWrapper(url: user.school!.timetablelink, username: user.username, password: user.password)
+        parser?.load(){
             data in
             self.data = data
             self.loaded = true
@@ -42,6 +43,7 @@ class ChangedTimetable{
                 completion()
             }
         }
+        
     }
     
     func refreshChanged(){
@@ -51,6 +53,7 @@ class ChangedTimetable{
         for day in timetable.days{
             allLessons.append(contentsOf: day.lessons)
         }
+        
         
         if let d = data, let u = user{
             for changedLesson in d.changedLessons{
