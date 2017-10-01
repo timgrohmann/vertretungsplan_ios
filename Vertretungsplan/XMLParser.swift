@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+
+/**
+ **DEPRECATED**
+ */
 class XMLParser: NSObject, XMLParserDelegate{
     var parser: Foundation.XMLParser?
     var url: String

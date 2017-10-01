@@ -12,9 +12,7 @@ import CoreData
 
 
 class School: NSManagedObject{
-    @NSManaged var link: String
     @NSManaged var name: String
-    @NSManaged var id: Int
     
     @NSManaged var timetablelink: String
     @NSManaged var primaryColor: String
@@ -37,58 +35,28 @@ class School: NSManagedObject{
         return UIColor.colorFromHex(textOnSecondaryColor)
     }
     
-    func loadProperties(_ completion: @escaping (_ notification: String?)->()){
+    func use(fetchResult: SchoolFetchResult){
+        timeschemes.removeAll()
         
-        let session = URLSession(configuration: URLSessionConfiguration.default)
+        self.timetablelink = fetchResult.link
+        self.name = fetchResult.name
+        self.primaryColor = fetchResult.primaryColor
+        self.secondaryColor = fetchResult.secondaryColor
+        self.textColor = fetchResult.textColor
+        self.textOnSecondaryColor = fetchResult.textOnSec
         
-        guard let url = URL(string: link) else{
-            completion("Schule muss neu eingerichtet werden.")
-            return
+        for ts in fetchResult.timescheme{
+            let a = TimeSchemeLesson(entity: NSEntityDescription.entity(forEntityName: "TimeSchemeLesson", in: delegate.managedObjectContext)!, insertInto: delegate.managedObjectContext)
+            a.start = ts.start
+            a.connectedToNext = ts.connectedToNext
+            a.connectedToPrevious = ts.connectedToPrevious
+            a.duration = ts.duration
+            a.lessonNumber = ts.lessonNumber
+            
+            timeschemes.insert(a)
         }
         
-        let task = session.dataTask(with: url, completionHandler: {
-            dataOpt, response, error in
-            
-            DispatchQueue.main.async{
-                if let data = dataOpt{
-                    if let school = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String:Any]{
-                        if let name = school["name"] as? String, let link = school["link"] as? String, let primary = school["primaryColor"] as? String, let secondary = school["secondaryColor"] as? String, let textColor = school["textColor"] as? String, let secText = school["textOnSec"] as? String, let lessons = school["lessons"] as? [[String:Any]]{
-                            
-                            self.name = name
-                            self.timetablelink = link
-                            self.primaryColor = primary
-                            self.secondaryColor = secondary
-                            self.textColor = textColor
-                            self.textOnSecondaryColor = secText
-                            delegate.saveContext()
-                            do{
-                                try self.compute(lessons: lessons)
-                            }catch{
-                                completion("Fehler beim parsen der Stundendaten")
-                            }
-                            
-                            completion(nil)
-                            
-                            
-                            
-                        }
-                    }else{
-                        if (response as? HTTPURLResponse)?.statusCode == 404{
-                            completion("Die Schuleigenschaften konnten nicht von '"+self.link+"' abgerufen werden, öffne die Einstellungen um deine Schule erneut einzurichten.")
-                        }else{
-                            completion("\""+self.link + "\" ist keine gültige JSON-Datei.")
-                        }
-                        
-                    }
-                }else{
-                    completion("Serververbindung fehlgeschlagen")
-                }
-            }
-            
-        })
-        
-        task.resume()
-        
+        //print(fetchResult)
     }
     
     func compute(lessons: [[String:Any]]) throws{

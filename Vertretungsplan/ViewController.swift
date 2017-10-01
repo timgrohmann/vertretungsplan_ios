@@ -54,7 +54,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 return
             }else{
                 user = users[0]
-                if user?.school!.id == nil{
+                if user?.school!.name == nil{
                     self.performSegue(withIdentifier: "settingsSegue", sender: nil)
                 }else{
                     self.reloadAll()
@@ -68,8 +68,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let color = UIColor.colorFromHex(c)
         self.navigationController?.navigationBar.barTintColor = color
         
-        //reloadAll()
-        loadImage()
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,64 +79,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         reloadAll()
     }
     
-    func loadImage(){
-        let url = "https://fahrradcenter-bernburg.de/wp-content/themes/design/img/schloss_saale.jpg"
-        
-        let task = URLSession(configuration: .default).dataTask(with: URLRequest(url: URL(string: url)!), completionHandler: {
-            data,error,_ in
-            
-            DispatchQueue.main.async {
-                if let imageData = data{
-                    let image = UIImage(data: imageData)
-                    self.imageView = UIImageView(frame: self.view.frame)
-                    
-                    let effect = UIBlurEffect(style: .light)
-                    let effectView = UIVisualEffectView(effect: effect)
-                    effectView.frame = self.view.frame
-                    
-                    self.imageView?.image = image
-                    
-                    self.imageView?.contentMode = .scaleAspectFill
-                    
-                    DispatchQueue.main.async{
-                        self.view.addSubview(effectView)
-                        self.view.sendSubview(toBack: effectView)
-                        self.view.insertSubview(self.imageView!, belowSubview: effectView)
-                        self.scrollViewDidScroll(self.collectionView)
-                    }
-                }
-            }
-
-        })
-        task.resume()
-    }
     
     func reloadAll(){
+        self.loadAllColors()
         
-        
-        user?.school!.loadProperties({
-            notification in
+        self.changedTimetable.load(){
             DispatchQueue.main.async{
-                
-                self.loadAllColors()
-
-                if let n = notification{
-                    self.lastChangedLabel.text = n
-                    return
-                }
-                            
-                self.changedTimetable.load(){
-                    DispatchQueue.main.async{
-                        self.collectionView.reloadData()
-                        self.lastChangedLabel.text = self.changedTimetable.data?.lastRefreshed
-                        if (!self.sentInitialData){
-                            self.wde.sendWatchData()
-                            self.sentInitialData = true
-                        }
-                    }
+                self.collectionView.reloadData()
+                self.lastChangedLabel.text = self.changedTimetable.data?.lastRefreshed
+                if (!self.sentInitialData){
+                    self.wde.sendWatchData()
+                    self.sentInitialData = true
                 }
             }
-        })
+        }
     }
     
     func loadAllColors(){
@@ -147,8 +101,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             self.navigationController?.navigationBar.tintColor = self.user?.school!.colorText
             self.navigationController?.navigationBar.titleTextAttributes?[NSAttributedStringKey.foregroundColor] = self.user?.school!.colorText
             self.view.backgroundColor = self.user?.school!.colorSecondary
-            self.lastChangedLabel.textColor = self.user?.school!.colorTextSecondary
-            self.lastChangedWrapperView.backgroundColor = self.user?.school!.colorSecondary
+            self.lastChangedLabel.textColor = self.user?.school!.colorText
+            self.lastChangedWrapperView.backgroundColor = self.user?.school!.colorPrimary
         })
     }
     
@@ -175,7 +129,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         (cell.viewWithTag(5) as! UILabel).text = ""
         
         for i in 1...5{
-            (cell.viewWithTag(i) as! UILabel).textColor = UIColor.black
+            (cell.viewWithTag(i) as! UILabel).textColor = user?.school?.colorTextSecondary
         }
         
         cell.viewWithTag(111)?.removeFromSuperview()
@@ -251,6 +205,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         view.sLesson(timetable.getLessonForIndexPath(dbIndexPath)!)
         
         view.descriptionLabel.textColor = user?.school!.colorSecondary
+        view.timeLabel.textColor = user?.school!.colorSecondary
         view.backgroundColor = user?.school!.colorPrimary
         view.finishButton.setTitleColor(user?.school!.colorSecondary, for: UIControlState())
         view.editButton.setTitleColor(user?.school!.colorSecondary, for: UIControlState())

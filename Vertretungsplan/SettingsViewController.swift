@@ -17,14 +17,12 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     @IBOutlet weak var pickerView: UIPickerView!
     
-    @IBOutlet weak var klassenStufe: UITextField!
-    
     @IBOutlet weak var klasse: UITextField!
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    var schools: [SchoolSummary] = []
+    var schools: [SchoolFetchResult] = []
     var user: User?
     let fetcher = SchoolFetcher()
     
@@ -38,7 +36,6 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         }
         
         klasse.text = user?.klasse
-        klassenStufe.text = user?.klassenstufe
         usernameTextField.text = user?.username
         passwordTextField.text = user?.password
         
@@ -59,10 +56,9 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             
             self.schools = ret
             self.pickerView.reloadAllComponents()
-            let usersSchoolId = self.user?.school!.id
             
             for (i,s) in self.schools.enumerated() {
-                if (s.id == usersSchoolId){
+                if (s.name == self.user?.school!.name){
                     self.pickerView.selectRow(i, inComponent: 0, animated: true)
                     self.schoolNameLabel.text = "Schule:  \n"+s.name
                 }
@@ -75,15 +71,12 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             return
         }
         let selected = schools[pickerView.selectedRow(inComponent: 0)]
-        user?.school!.id = selected.id
-        user?.school!.link = selected.link
-        user?.school!.name = selected.name
+        
         user?.klasse = klasse.text!
-        user?.klassenstufe = klassenStufe.text!
         user?.username = usernameTextField.text ?? ""
         user?.password = passwordTextField.text ?? ""
         
-        user?.school?.loadProperties(){_ in}
+        user?.school?.use(fetchResult: selected)
         delegate.saveContext()
     }
     
@@ -105,33 +98,5 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         schoolNameLabel.text = "Schule:  \n"+schools[row].name
         
         delegate.saveContext()
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        /*self.navigationItem.hidesBackButton = !textFieldsOkay()
-
-        
-        if (Int(textField.text!) != nil && Int(textField.text!) != 0){
-            textField.resignFirstResponder()
-            return true
-        }else{
-            textField.text = ""
-            
-            //Fade color in and out
-            UIView.animate(withDuration: 0.1, animations: {
-                textField.backgroundColor = UIColor.colorFromHex("D05000", alpha: 0.1)
-                }, completion: {
-                    bool in
-                    UIView.animate(withDuration: 0.1, animations: {
-                        textField.backgroundColor = UIColor.clear
-                    })
-                })
-            return false
-        }*/
-        return true
-    }
-    
-    func textFieldsOkay() -> Bool{
-        return (Int(klassenStufe.text!) != nil && Int(klassenStufe.text!) != 0) && (Int(klasse.text!) != nil && Int(klasse.text!) != 0)
     }
 }
