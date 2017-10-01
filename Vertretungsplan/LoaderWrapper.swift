@@ -8,6 +8,10 @@
 
 import Foundation
 
+/**
+ Wraps multiple JSONLoader-objects to load multiple pages at once.
+ Uses _"&page= "_ as an additional URL parameter.
+*/
 class LoaderWrapper{
     var url: String
     var username: String?
@@ -15,11 +19,9 @@ class LoaderWrapper{
     
     var loaders: [JSONLoader] = []
     
-    var failed = 0
-    
     var dataElements: [ChangedTimeTableData] = []
     
-    var completionHandler: (ChangedTimeTableData) -> () = {_ in }
+    var completionHandler: (ChangedTimeTableData?, JSONLoadError?) -> () = {_,_ in }
     
     init(url: String, username: String?, password: String?) {
         self.url = url + "?"
@@ -39,7 +41,7 @@ class LoaderWrapper{
         }
     }
     
-    func load(completion: @escaping (ChangedTimeTableData) -> ()){
+    func load(completion: @escaping (ChangedTimeTableData?, JSONLoadError?) -> ()){
         self.completionHandler = completion
         
         for loader in loaders {
@@ -47,7 +49,8 @@ class LoaderWrapper{
                 data, error in
                 
                 if error != nil{
-                    self.failed += 1
+                    completion(nil,error)
+                    return
                 }
                 
                 guard let data = data else {return}
@@ -61,12 +64,12 @@ class LoaderWrapper{
     }
     
     func checkDone(){
-        if (dataElements.count + failed == loaders.count){
+        if (dataElements.count == loaders.count){
             var allLessons: [ChangedLesson] = []
             for d in dataElements{
                 allLessons.append(contentsOf: d.changedLessons)
             }
-            completionHandler(ChangedTimeTableData(changedLessons: allLessons, schoolName: dataElements[0].schoolName, lastRefreshed: dataElements[0].lastRefreshed))
+            completionHandler(ChangedTimeTableData(changedLessons: allLessons, schoolName: dataElements[0].schoolName, lastRefreshed: dataElements[0].lastRefreshed), nil)
         }
     }
     

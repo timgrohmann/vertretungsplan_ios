@@ -12,9 +12,9 @@ import CoreData
 
 class ChangedTimetable{
     var parser: LoaderWrapper?
-    //var changedLessons: [ChangedLesson] = []
     var applyingLessons: [ChangedLesson] = []
     var data: ChangedTimeTableData?
+    
     var loaded = false
     var user: User?{
         do{
@@ -34,7 +34,16 @@ class ChangedTimetable{
         
         parser = LoaderWrapper(url: user.school!.timetablelink, username: user.username, password: user.password)
         parser?.load(){
-            data in
+            data, error in
+            
+            if error != nil{
+                self.data = ChangedTimeTableData(changedLessons: [], schoolName: "", lastRefreshed: "Ein Fehler ist aufgetreten!")
+                DispatchQueue.main.async{
+                    completion()
+                }
+                return
+            }
+            
             self.data = data
             self.loaded = true
             

@@ -262,8 +262,8 @@
 				182446571D6090CD004D5207 /* CollectionView */,
 				182446531D607274004D5207 /* Data */,
 				189AB6B71D0C1C0E002C3526 /* AppDelegate.swift */,
-				189AB6B91D0C1C0E002C3526 /* ViewController.swift */,
 				189AB6BB1D0C1C0E002C3526 /* Main.storyboard */,
+				18A5E29E1F814BE3009F587B /* ViewControllers */,
 				189AB6C11D0C1C0E002C3526 /* Assets.xcassets */,
 				189AB6C31D0C1C0E002C3526 /* LaunchScreen.storyboard */,
 				189AB6C61D0C1C0E002C3526 /* Info.plist */,
@@ -279,11 +279,19 @@
 				18318D941D7C43AA00072640 /* ChangedTimeTableData.swift */,
 				18CDC6E11D636D49001821D9 /* School.swift */,
 				18318DA31D7C570A00072640 /* SchoolFetcher.swift */,
-				18318DA51D7C62C500072640 /* SettingsViewController.swift */,
 				18318DA71D7C693D00072640 /* User.swift */,
 				189030F71D904CE8002F9283 /* TimeScheme.swift */,
 			);
 			path = Vertretungsplan;
+			sourceTree = "<group>";
+		};
+		18A5E29E1F814BE3009F587B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				189AB6B91D0C1C0E002C3526 /* ViewController.swift */,
+				18318DA51D7C62C500072640 /* SettingsViewController.swift */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		18CDC6DC1D636256001821D9 /* SettingsView */ = {
